@@ -280,7 +280,6 @@ class Tree extends Node {
         size--;
 
         Node parent = whoIsParent(removeNode, nodeRoot);
-
         if ((removeNode.color == 1) && (removeNode.leftNode == null && removeNode.rightNode == null)) {
             if (parent.leftNode == removeNode) {
                 parent.leftNode = null;
@@ -301,6 +300,8 @@ class Tree extends Node {
             maxNode.rightNode = removeNode.rightNode;
             if (parent == null) {
                 nodeRoot = maxNode;
+                maxNode.leftNode = removeNode.leftNode;
+                nodeRoot.color = 0;
                 return;
             }
             if (parent.leftNode == removeNode) {
@@ -337,7 +338,10 @@ class Tree extends Node {
                 }
 
             } else {
-                if (parent.leftNode == removeNode) {
+                if (nodeRoot == removeNode) {
+                    nodeRoot = removeNode.rightNode;
+                    nodeRoot.color = 0;
+                } else if (parent.leftNode == removeNode) {
                     parent.leftNode = removeNode.rightNode;
                     parent.leftNode.color = 0;
                 } else {
@@ -358,6 +362,7 @@ class Tree extends Node {
         }
 
     }
+
 
     private Node search(int number, Node node) {
         Node nodePointer = node;
