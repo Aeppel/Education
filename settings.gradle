@@ -15,4 +15,6 @@ include 'base:calculateOfTickets'
 findProject(':base:calculateOfTickets')?.name = 'calculateOfTickets'
 include 'base:array'
 findProject(':base:array')?.name = 'array'
+include 'algorithms:Tree'
+findProject(':algorithms:Tree')?.name = 'Tree'
 
