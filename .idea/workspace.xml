@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0216894-aab8-4de5-938c-9516de93fb1c" name="Changes" comment="Add checker of red nephew&#10;&#10;Добавлен этап проверки для балансировки дерева где при балансировке учитывается, что если у удалённого элемента существует красный племянник, необходима ротация элементов до одинаковой высоты дерева">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/Tree/src/main/java/org/pervishkond/tree/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/Tree/src/main/java/org/pervishkond/tree/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/Tree/src/main/java/org/pervishkond/tree/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/Tree/src/main/java/org/pervishkond/tree/Tree.java" afterDir="false" />
+    <list default="true" id="a0216894-aab8-4de5-938c-9516de93fb1c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +224,21 @@
       <option name="project" value="LOCAL" />
       <updated>1678612365253</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add checker of red nephew&#10;&#10;Добавлен этап проверки для балансировки дерева где при балансировке учитывается, что если у удалённого элемента существует красный племянник, необходима ротация элементов до одинаковой высоты дерева">
+      <created>1678622533481</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678622533481</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Change remove function&#10;&#10;Изменена функция удаления корневой при существовании одного правого элемента.">
+      <created>1678622818859</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678622818859</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -243,7 +255,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add init version" />
     <MESSAGE value="Add Tree task&#10;&#10;В качестве финальной задачи для изучения Java написан код сортировки Красно-черного дерева. Усвоено понимание принципов сортировки и балансировки при довбавления и удаления элементов в алгоритме" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Tree task&#10;&#10;В качестве финальной задачи для изучения Java написан код сортировки Красно-черного дерева. Усвоено понимание принципов сортировки и балансировки при довбавления и удаления элементов в алгоритме" />
+    <MESSAGE value="Add checker of red nephew&#10;&#10;Добавлен этап проверки для балансировки дерева где при балансировке учитывается, что если у удалённого элемента существует красный племянник, необходима ротация элементов до одинаковой высоты дерева" />
+    <MESSAGE value="Change remove function&#10;&#10;Изменена функция удаления корневой при существовании одного правого элемента." />
+    <option name="LAST_COMMIT_MESSAGE" value="Change remove function&#10;&#10;Изменена функция удаления корневой при существовании одного правого элемента." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
