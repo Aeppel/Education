@@ -65,8 +65,8 @@ public class Main {
         tree.remove(43);
         tree.remove(66);
         tree.remove(97);
-//      tree.remove(65);
         tree.remove(99);
+        tree.remove(48);
 
     }
 

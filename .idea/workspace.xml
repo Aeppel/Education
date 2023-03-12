@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0216894-aab8-4de5-938c-9516de93fb1c" name="Changes" comment="" />
+    <list default="true" id="a0216894-aab8-4de5-938c-9516de93fb1c" name="Changes" comment="Add checker of red nephew&#10;&#10;Добавлен этап проверки для балансировки дерева где при балансировке учитывается, что если у удалённого элемента существует красный племянник, необходима ротация элементов до одинаковой высоты дерева">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/Tree/src/main/java/org/pervishkond/tree/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/Tree/src/main/java/org/pervishkond/tree/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/Tree/src/main/java/org/pervishkond/tree/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/Tree/src/main/java/org/pervishkond/tree/Tree.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,6 +74,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -86,7 +91,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "jdk.selected.JAVA_MODULE": "liberica-17 (2)",
-    "last_opened_file_path": "C:/Users/Catjackass/IdeaProjects/education/algorithms/Tree/src/main/java/org/pervishkond/tree",
+    "last_opened_file_path": "C:/Users/Catjackass/IdeaProjects/education",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",

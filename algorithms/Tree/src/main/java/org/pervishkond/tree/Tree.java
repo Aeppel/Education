@@ -158,10 +158,6 @@ class Tree extends Node {
                 }
             }
         } else if (node.leftNode == null || node.leftNode.color == 0) {
-//            nodePointer = node;
-//            node.rightNode.leftNode = nodePointer;
-//            parent.leftNode = node.rightNode;
-//            node.rightNode = null;
             nodePointer = node.rightNode.leftNode;
             node.rightNode.leftNode = node;
             parent.leftNode = node.rightNode;
@@ -447,6 +443,7 @@ class Tree extends Node {
                         }
                     }
 
+
             } else if ((node.color == 1 && node.leftNode.color == 0) && parent.rightNode.color == 0) {
                 node.color = 0;
                 node.rightNode.color = 1;
@@ -455,10 +452,13 @@ class Tree extends Node {
                 rotateLeft(parent.rightNode, parent);
                 reverseRecoloring(whoIsParent(parent, nodeRoot));
             }
-//
+            if ((node.leftNode != null && node.leftNode.color == 0 && node.rightNode != null && node.rightNode.color == 0) && node.rightNode.leftNode != null && node.rightNode.leftNode.color == 1) {// Проверка на красного племянника при удалении красной вершины
+                rotateRight(node.rightNode.leftNode, node.rightNode);
+                node.leftNode = null;
+                rotateLeft(node.rightNode, node);
+                recoloringAfterRemoving(whoIsParent(node, nodeRoot));
+            }
 
-
-//            node.leftNode = null;
             if (parent.rightNode.leftNode != null && parent.rightNode.leftNode.number == 0)
                 parent.rightNode.leftNode = null;
             if (parent.rightNode.rightNode != null && parent.rightNode.rightNode.number == 0)
@@ -498,7 +498,6 @@ class Tree extends Node {
                     node.leftNode.color = 1;
 
                 } else {
-//                    rotateRight(node.leftNode, parent);
                     pushUp(node);
 
 
@@ -507,6 +506,12 @@ class Tree extends Node {
                 node.leftNode.color = 1;
                 rotateRight(parent.leftNode, parent);
                 reverseRecoloring(whoIsParent(parent, nodeRoot));
+            }
+            if ((node.leftNode != null && node.leftNode.color == 0 && node.rightNode != null && node.rightNode.color == 0) && node.rightNode.leftNode != null && node.rightNode.leftNode.color == 1) {// Проверка на красного племянника при удалении красной вершины
+                rotateRight(node.rightNode.leftNode, node.rightNode);
+                node.leftNode = null;
+                rotateLeft(node.rightNode, node);
+                recoloringAfterRemoving(whoIsParent(node, nodeRoot));
             }
 
             if (parent.leftNode.leftNode != null && parent.leftNode.leftNode.number == 0)
