@@ -4,7 +4,54 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0216894-aab8-4de5-938c-9516de93fb1c" name="Changes" comment="" />
+    <list default="true" id="a0216894-aab8-4de5-938c-9516de93fb1c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/legion/build/classes/java/main/com/pervishkond/legion/Legion.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/legion/build/libs/legion-1.0-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/legion/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/legion/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/list/build/classes/java/main/org/pervishkond/list/array/MyArrayList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/list/build/classes/java/main/org/pervishkond/list/linked/MyLinkedList.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/list/build/classes/java/main/org/pervishkond/list/linked/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/list/build/libs/list-1.0-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/list/build/libs/list-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/list/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/list/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/list/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/classes/java/main/org/pervishkond/tree/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/classes/java/main/org/pervishkond/tree/Node.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/classes/java/main/org/pervishkond/tree/Tree.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/libs/Tree-1.0-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/array/build/classes/java/main/com/pervishkond/array/Array.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/array/build/libs/array-1.0-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/array/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/array/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/calculateoftickets/build/classes/java/main/CalculateOfTickets.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/calculateoftickets/build/libs/calculateOfTickets-1.0-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/calculateoftickets/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/calculateoftickets/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/matrix/build/classes/java/main/com/pervishkond/matrix/Matrix.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/matrix/build/libs/matrix-1.0-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/matrix/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/matrix/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/matrix/src/main/java/com/pervishkond/matrix/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/base/matrix/src/main/java/com/pervishkond/matrix/Matrix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/montecarlo/build/classes/java/main/com/pervishkond/montecarlo/MonteCarlo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/montecarlo/build/libs/montecarlo-1.0-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/montecarlo/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/montecarlo/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/montecarlo/src/main/java/com/pervishkond/montecarlo/MonteCarlo.java" beforeDir="false" afterPath="$PROJECT_DIR$/base/montecarlo/src/main/java/com/pervishkond/montecarlo/MonteCarlo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/tickets/build/classes/java/main/org/pervishkond/loops/tickets/Tickets.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/tickets/build/classes/java/main/org/pervishkond/loops/ticketsv2/TicketsV2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/tickets/build/libs/tickets-1.0-all.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/tickets/build/libs/tickets-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/tickets/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/tickets/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/tickets/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/base/tickets/src/main/java/org/pervishkond/loops/tickets/Tickets.java" beforeDir="false" afterPath="$PROJECT_DIR$/base/tickets/src/main/java/org/pervishkond/loops/tickets/Tickets.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -107,7 +154,7 @@
       <recent name="list.linked" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.education [shadowJar]">
+  <component name="RunManager" selected="Gradle.education [clean]">
     <configuration name="Array" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.pervishkond.array.Array" />
       <module name="education.base.array.main" />
@@ -191,8 +238,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.education [shadowJar]" />
         <item itemvalue="Gradle.education [clean]" />
+        <item itemvalue="Gradle.education [shadowJar]" />
         <item itemvalue="Application.Legion" />
         <item itemvalue="Application.Array" />
         <item itemvalue="Application.MonteCarlo" />
@@ -243,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678623262159</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Change name of module">
+      <created>1678623482666</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1678623482666</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -263,7 +317,8 @@
     <MESSAGE value="Add checker of red nephew&#10;&#10;Добавлен этап проверки для балансировки дерева где при балансировке учитывается, что если у удалённого элемента существует красный племянник, необходима ротация элементов до одинаковой высоты дерева" />
     <MESSAGE value="Change remove function&#10;&#10;Изменена функция удаления корневой при существовании одного правого элемента." />
     <MESSAGE value="Add jar files&#10;&#10;Добавлены Jar файлы каждой задачи" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add jar files&#10;&#10;Добавлены Jar файлы каждой задачи" />
+    <MESSAGE value="Change name of module" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change name of module" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

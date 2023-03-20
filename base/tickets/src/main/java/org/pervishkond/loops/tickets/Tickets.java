@@ -19,7 +19,7 @@ public class Tickets {
                     for (int leftNumbers1 = 0; leftNumbers1 <= 9; leftNumbers1++) {
                         for (int leftNumbers2 = 0; leftNumbers2 <= 9; leftNumbers2++) {
                             for (int leftNumbers3 = 0; leftNumbers3 <= 9; leftNumbers3++) {
-                                if (leftNumbers1 + leftNumbers2 + leftNumbers3 == rightNumbers1 + rightNumbers2 + rightNumbers3) {
+                                if (isLuckyTicket(leftNumbers1, leftNumbers2, leftNumbers3, rightNumbers1, rightNumbers2, rightNumbers3)) {
                                     luckyTickets++;
                                 }
 
@@ -32,6 +32,8 @@ public class Tickets {
         return luckyTickets;
     }
 
-
+    private Boolean isLuckyTicket(int leftNumbers1, int leftNumbers2, int leftNumbers3, int rightNumbers1, int rightNumbers2, int rightNumbers3) {
+        return leftNumbers1 + leftNumbers2 + leftNumbers3 == rightNumbers1 + rightNumbers2 + rightNumbers3;
+    }
 }
 
