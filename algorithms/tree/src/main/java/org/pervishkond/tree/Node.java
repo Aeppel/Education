@@ -5,6 +5,7 @@ public class Node {
     protected Node leftNode;
     protected int number;
     protected int color = 1;
+    protected Node nodeRoot;
 
 
     public Node() {
@@ -26,4 +27,26 @@ public class Node {
         }
         return result;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public Node getNodeRoot() {
+        return nodeRoot;
+    }
+
+    public Node getLeftNode() {
+        return leftNode;
+    }
+
+    public Node getRightNode() {
+        return rightNode;
+    }
+
+
 }

@@ -1,8 +1,8 @@
 package org.pervishkond.tree;
 
-class Tree extends Node {
+public class Tree extends Node {
     private int size = 0;
-    protected Node nodeRoot;
+
 
     public Tree() {
     }
@@ -91,7 +91,13 @@ class Tree extends Node {
     }
 
 
-    protected void rotateLeft(Node node, Node parent) {
+    void rotateLeft(Node node, Node parent) {
+        if (node == null || parent == null) {
+            return;
+        }
+        if (checkForChild(node, parent)) {
+            return;
+        }
         Node n = node.leftNode;
         if (node.leftNode == null || node.leftNode.color == 0) {
             node.color = 0;
@@ -115,13 +121,14 @@ class Tree extends Node {
             node.leftNode = nodePointer;
 
 
-        } else if (parent.leftNode == null) {
+        } else if (parent.leftNode == null || parent.leftNode.number == 0) {
             Node nodePointer = nodeRoot;
             if (parent == nodeRoot) {
                 nodeRoot = node;
                 nodePointer.rightNode = node.leftNode;
                 nodeRoot.leftNode = nodePointer;
                 nodeRoot.rightNode.color = 0;
+                nodeRoot.color = 0;
             } else {
                 Node grandParent = whoIsParent(parent, nodeRoot);
                 if (grandParent.leftNode == parent) {
@@ -132,7 +139,6 @@ class Tree extends Node {
                     grandParent.rightNode = node;
                 }
                 node.leftNode.rightNode = nodePointer;
-
                 recoloring(parent);
             }
         }
@@ -141,6 +147,10 @@ class Tree extends Node {
 
 
     protected void rotateRight(Node node, Node parent) {
+        if (node == null || parent == null) {
+            return;
+        }
+
         Node nodePointer = parent, n = node.rightNode;
         if (node.rightNode == null || node.rightNode.color == 0) {
             node.color = 0;
@@ -455,7 +465,9 @@ class Tree extends Node {
             } else if (parent.rightNode.rightNode.color == 1 || parent.rightNode.leftNode.color == 1) {// brother's black, one of his child is red
                 node.rightNode.color = 1;
                 rotateLeft(parent.rightNode, parent);
-                reverseRecoloring(whoIsParent(parent, nodeRoot));
+                if (whoIsParent(parent, nodeRoot) != nodeRoot) {
+                    reverseRecoloring(whoIsParent(parent, nodeRoot));
+                }
             }
             if ((node.leftNode != null && node.leftNode.color == 0 && node.rightNode != null && node.rightNode.color == 0) && node.rightNode.leftNode != null && node.rightNode.leftNode.color == 1) {// Проверка на красного племянника при удалении красной вершины
                 rotateRight(node.rightNode.leftNode, node.rightNode);
@@ -576,8 +588,6 @@ class Tree extends Node {
         if (parent.rightNode != null) {
             parent.rightNode.color = 0;
         }
-
-
     }
 
     private void swap(Node maxNode, Node removeNode, Node parent) {
@@ -621,6 +631,14 @@ class Tree extends Node {
         node.rightNode.color = 1;
         node.leftNode.color = 1;
 
+    }
+
+    private Boolean checkForChild(Node node, Node parent) {
+        if (parent.leftNode == node) {
+            return false;
+        } else if (parent.rightNode == node) {
+            return false;
+        } else return true;
     }
 
 }

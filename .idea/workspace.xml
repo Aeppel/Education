@@ -5,52 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0216894-aab8-4de5-938c-9516de93fb1c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/algorithms/tree/src/test/java/org/pervishkond/tree/TestTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/legion/build/classes/java/main/com/pervishkond/legion/Legion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/legion/build/libs/legion-1.0-all.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/legion/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/legion/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/list/build/classes/java/main/org/pervishkond/list/array/MyArrayList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/list/build/classes/java/main/org/pervishkond/list/linked/MyLinkedList.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/list/build/classes/java/main/org/pervishkond/list/linked/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/list/build/libs/list-1.0-all.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/list/build/libs/list-1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/list/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/list/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/list/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/classes/java/main/org/pervishkond/tree/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/classes/java/main/org/pervishkond/tree/Node.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/classes/java/main/org/pervishkond/tree/Tree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/libs/Tree-1.0-all.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/algorithms/tree/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/array/build/classes/java/main/com/pervishkond/array/Array.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/array/build/libs/array-1.0-all.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/array/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/array/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/calculateoftickets/build/classes/java/main/CalculateOfTickets.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/calculateoftickets/build/libs/calculateOfTickets-1.0-all.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/calculateoftickets/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/calculateoftickets/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/matrix/build/classes/java/main/com/pervishkond/matrix/Matrix.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/matrix/build/libs/matrix-1.0-all.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/matrix/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/matrix/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/matrix/src/main/java/com/pervishkond/matrix/Matrix.java" beforeDir="false" afterPath="$PROJECT_DIR$/base/matrix/src/main/java/com/pervishkond/matrix/Matrix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/montecarlo/build/classes/java/main/com/pervishkond/montecarlo/MonteCarlo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/montecarlo/build/libs/montecarlo-1.0-all.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/montecarlo/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/montecarlo/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/montecarlo/src/main/java/com/pervishkond/montecarlo/MonteCarlo.java" beforeDir="false" afterPath="$PROJECT_DIR$/base/montecarlo/src/main/java/com/pervishkond/montecarlo/MonteCarlo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/tickets/build/classes/java/main/org/pervishkond/loops/tickets/Tickets.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/tickets/build/classes/java/main/org/pervishkond/loops/ticketsv2/TicketsV2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/tickets/build/libs/tickets-1.0-all.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/tickets/build/libs/tickets-1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/tickets/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/tickets/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/tickets/build/tmp/shadowJar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/tickets/src/main/java/org/pervishkond/loops/tickets/Tickets.java" beforeDir="false" afterPath="$PROJECT_DIR$/base/tickets/src/main/java/org/pervishkond/loops/tickets/Tickets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Node.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,95 +114,129 @@
       <recent name="list.linked" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.education [clean]">
-    <configuration name="Array" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.pervishkond.array.Array" />
-      <module name="education.base.array.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.pervishkond.array.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Legion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.pervishkond.legion.Legion" />
-      <module name="education.algorithms.legion.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.pervishkond.legion.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MonteCarlo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.pervishkond.montecarlo.MonteCarlo" />
-      <module name="education.base.montecarlo.main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.pervishkond.montecarlo.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="education [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.TestTree.setTestTree (1)">
+    <configuration name="TestTree.setTestTree (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="clean" />
+            <option value=":algorithms:Tree:test" />
+            <option value="--tests" />
+            <option value="&quot;org.pervishkond.tree.TestTree.setTestTree&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="education [shadowJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestTree.setTestTree" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="shadowJar" />
+            <option value=":algorithms:Tree:test" />
+            <option value="--tests" />
+            <option value="&quot;TestTree.setTestTree&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TestTree.testAdd (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":algorithms:Tree:test" />
+            <option value="--tests" />
+            <option value="&quot;org.pervishkond.tree.TestTree.testAdd&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TestTree.testAdd" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":algorithms:Tree:test" />
+            <option value="--tests" />
+            <option value="&quot;TestTree.testAdd&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TestTree.testRotateLeft" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":algorithms:Tree:test" />
+            <option value="--tests" />
+            <option value="&quot;org.pervishkond.tree.TestTree.testRotateLeft&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.education [clean]" />
-        <item itemvalue="Gradle.education [shadowJar]" />
-        <item itemvalue="Application.Legion" />
-        <item itemvalue="Application.Array" />
-        <item itemvalue="Application.MonteCarlo" />
+        <item itemvalue="Gradle.TestTree.setTestTree (1)" />
+        <item itemvalue="Gradle.TestTree.testAdd (1)" />
+        <item itemvalue="Gradle.TestTree.testRotateLeft" />
+        <item itemvalue="Gradle.TestTree.setTestTree" />
+        <item itemvalue="Gradle.TestTree.testAdd" />
       </list>
     </recent_temporary>
   </component>
@@ -297,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678623482666</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Refresh gitignore">
+      <created>1681489883357</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681489883357</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -318,7 +319,8 @@
     <MESSAGE value="Change remove function&#10;&#10;Изменена функция удаления корневой при существовании одного правого элемента." />
     <MESSAGE value="Add jar files&#10;&#10;Добавлены Jar файлы каждой задачи" />
     <MESSAGE value="Change name of module" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change name of module" />
+    <MESSAGE value="Refresh gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refresh gitignore" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -329,6 +331,57 @@
           <url>file://$PROJECT_DIR$/base/array/src/main/java/com/pervishkond/array/Array.java</url>
           <line>12</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Main.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Main.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/test/java/org/pervishkond/tree/TestTree.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
+          <line>399</line>
+          <properties class="org.pervishkond.tree.Tree" method="balancingAfterRemoving">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
+          <line>582</line>
+          <properties class="org.pervishkond.tree.Tree" method="reverseRecoloring">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
+          <line>93</line>
+          <properties class="org.pervishkond.tree.Tree" method="rotateLeft">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
+          <line>635</line>
+          <properties class="org.pervishkond.tree.Tree" method="checkForChild">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
