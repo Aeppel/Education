@@ -1,109 +1,68 @@
 package org.pervishkond.tree;
 
-public class Tree extends Node {
+class Tree extends Node {
     private int size = 0;
-
+    protected Node nodeRoot;
 
     public Tree() {
     }
 
-    public boolean add(int number) {
-        Node checkingBadNode;
-        if (size == 0) {
+    public void add(int number) {
+        if (empty()) {
             nodeRoot = new Node(number);
-            nodeRoot.color = 0;
+            nodeRoot.setColor("Black");
         } else {
-            Node nodePointer = nodeRoot;
-            Node addNode = new Node(number);
-            while (size > 0) {
-                if (nodePointer.number > addNode.number && nodePointer.leftNode != null) {
-                    nodePointer = nodePointer.leftNode;
-                } else if (nodePointer.number < addNode.number && nodePointer.rightNode != null) {
-                    nodePointer = nodePointer.rightNode;
-                } else if (nodePointer.number == addNode.number) {
-                    return false;
-                } else {
-                    break;
-                }
-            }
-            if (nodePointer.number > addNode.number) {
-                nodePointer.leftNode = addNode;
-            } else {
-                nodePointer.rightNode = addNode;
-            }
-            checkingBadNode = checkRight(nodeRoot);
-            if (checkingBadNode != null) {
-                optionsToBalance(checkingBadNode);
-            }
-            checkingBadNode = checkLeft(nodeRoot);
-            if (checkingBadNode != null) {
-                optionsToBalance(checkingBadNode);
-            }
+            putIntoTree(number);
         }
         size++;
-        return true;
-
     }
 
     private void optionsToBalance(Node node) {
         if (node == nodeRoot) {
-            recoloring(nodeRoot);
+            recoloring(nodeRoot, nodeRoot);
         } else {
             Node parent = whoIsParent(node, nodeRoot);
             if (parent.leftNode == node) {
-                if (parent.rightNode != null && parent.rightNode.color == 1) {
-                    recoloring(parent);
+                if (isRightBrotherRed(parent)) {
+                    recoloring(parent, nodeRoot);
                 } else {
                     rotateRight(node, parent);
                 }
             } else if (parent.rightNode == node) {
-                if (parent.leftNode != null && parent.leftNode.color == 1) {
-                    recoloring(parent);
+                if (isLeftBrotherRed(parent)) {
+                    recoloring(parent, nodeRoot);
                 } else {
                     rotateLeft(node, parent);
                 }
 
             } else {
-                recoloring(parent);
+                recoloring(parent, nodeRoot);
             }
 
             Node checkingBadNode = checkLeft(nodeRoot);
-            if (checkingBadNode != null) {
+            if (isNotNull(checkingBadNode)) {
                 optionsToBalance(checkingBadNode);
             }
             checkingBadNode = checkRight(nodeRoot);
-            if (checkingBadNode != null) {
+            if (isNotNull(checkingBadNode)) {
                 optionsToBalance(checkingBadNode);
             }
         }
     }
 
-    private void recoloring(Node parent) {
-        parent.color = 1;
-        if (parent.leftNode != null) {
-            parent.leftNode.color = 0;
-        }
-        if (parent.rightNode != null) {
-            parent.rightNode.color = 0;
-        }
-        nodeRoot.color = 0;
-
-    }
-
-
-    void rotateLeft(Node node, Node parent) {
+    protected void rotateLeft(Node node, Node parent) {
         if (node == null || parent == null) {
             return;
         }
         if (checkForChild(node, parent)) {
             return;
         }
-        Node n = node.leftNode;
-        if (node.leftNode == null || node.leftNode.color == 0) {
-            node.color = 0;
-            parent.color = 1;
+        Node ln = node.leftNode;
+        if (isLeftNodeBlack(node)) {
+            node.setColor("Black");
+            parent.setColor("Red");
             node.leftNode = parent;
-            parent.rightNode = n;
+            parent.rightNode = ln;
             if (parent == nodeRoot) {
                 nodeRoot = node;
             } else {
@@ -114,21 +73,19 @@ public class Tree extends Node {
                     grandparent.rightNode = node;
                 }
             }
-        } else if (node.rightNode == null || node.rightNode.color == 0) { /// TODO: 21.11.2022 разобраться с малым поворотом на левую сторону
+        } else if (isRightNodeBlack(node)) { /// TODO: 21.11.2022 разобраться с малым поворотом на левую сторону
             Node nodePointer = node.leftNode.rightNode;
             node.leftNode.rightNode = node;
             parent.rightNode = node.leftNode;
             node.leftNode = nodePointer;
-
-
-        } else if (parent.leftNode == null || parent.leftNode.number == 0) {
+        } else if (isNull(parent.leftNode) || parent.leftNode.number == 0) {
             Node nodePointer = nodeRoot;
             if (parent == nodeRoot) {
                 nodeRoot = node;
                 nodePointer.rightNode = node.leftNode;
                 nodeRoot.leftNode = nodePointer;
-                nodeRoot.rightNode.color = 0;
-                nodeRoot.color = 0;
+                nodeRoot.rightNode.setColor("Black");
+                nodeRoot.setColor("Black");
             } else {
                 Node grandParent = whoIsParent(parent, nodeRoot);
                 if (grandParent.leftNode == parent) {
@@ -139,7 +96,7 @@ public class Tree extends Node {
                     grandParent.rightNode = node;
                 }
                 node.leftNode.rightNode = nodePointer;
-                recoloring(parent);
+                recoloring(parent, nodeRoot);
             }
         }
 
@@ -150,13 +107,13 @@ public class Tree extends Node {
         if (node == null || parent == null) {
             return;
         }
-
-        Node nodePointer = parent, n = node.rightNode;
-        if (node.rightNode == null || node.rightNode.color == 0) {
-            node.color = 0;
-            parent.color = 1;
+        Node nodePointer;
+        Node rn = node.rightNode;
+        if (isRightNodeBlack(node)) {
+            node.setColor("Black");
+            parent.setColor("Red");
             node.rightNode = parent;
-            parent.leftNode = n;
+            parent.leftNode = rn;
             if (parent == nodeRoot) {
                 nodeRoot = node;
             } else {
@@ -167,19 +124,19 @@ public class Tree extends Node {
                     grandparent.rightNode = node;
                 }
             }
-        } else if (node.leftNode == null || node.leftNode.color == 0) {
+        } else if (isLeftNodeBlack(node)) {
             nodePointer = node.rightNode.leftNode;
             node.rightNode.leftNode = node;
             parent.leftNode = node.rightNode;
             node.rightNode = nodePointer;
 
-        } else if (parent.rightNode == null) {
+        } else if (isNull(parent.rightNode)) {
             nodePointer = nodeRoot;
             if (parent == nodeRoot) {
                 nodeRoot = node;
                 nodePointer.leftNode = node.rightNode;
                 nodeRoot.rightNode = nodePointer;
-                nodeRoot.leftNode.color = 0;
+                nodeRoot.leftNode.setColor("Black");
             } else {
                 Node grandParent = whoIsParent(parent, nodeRoot);
                 if (grandParent.rightNode == parent) {
@@ -190,39 +147,30 @@ public class Tree extends Node {
                     grandParent.leftNode = node;
                 }
                 node.rightNode.leftNode = nodePointer;
-
-                recoloring(parent);
-
+                recoloring(parent, nodeRoot);
             }
         }
-
 
     }
 
+
     protected Node checkRight(Node node) {
         Node badNode = null;
-        if ((node.leftNode != null) && (node.color != node.leftNode.color)) {
-            badNode = checkRight(node.leftNode);
-        } else if ((node.leftNode != null) && (node.leftNode.color == 0)) {
+        if (isGoingLeft(node)) {
             badNode = checkRight(node.leftNode);
         }
-        if (badNode == null) {
+        if (isNull(badNode)) {
             badNode = node;
-
-            if ((node.rightNode != null) && (node.color != node.rightNode.color)) {
-                badNode = checkRight(node.rightNode);
-            } else if ((node.rightNode != null) && (node.rightNode.color == 0)) {
+            if (isGoingRight(node)) {
                 badNode = checkRight(node.rightNode);
             }
         }
-        if (badNode == null) {
+        if (isNull(badNode)) {
             return null;
         }
-        if ((node.leftNode == null) && (node.rightNode == null)) {
+        if (isNoChildren(node)) {
             return null;
-        } else if ((node.rightNode == null) && (badNode.color != node.leftNode.color)) {
-            return null;
-        } else if ((node.leftNode == null) && (badNode.color != node.rightNode.color)) {
+        } else if (isNeighborSameColor(node, badNode)) {
             return null;
         }
         return badNode;
@@ -230,56 +178,30 @@ public class Tree extends Node {
 
     protected Node checkLeft(Node node) {
         Node badNode = null;
-        if ((node.rightNode != null) && (node.color != node.rightNode.color)) {
-            badNode = checkLeft(node.rightNode);
-        } else if ((node.rightNode != null) && (node.rightNode.color == 0)) {
+        if (isGoingRight(node)) {
             badNode = checkLeft(node.rightNode);
         }
         if (badNode == null) {
             badNode = node;
 
-            if ((node.leftNode != null) && (node.color != node.leftNode.color)) {
-                badNode = checkLeft(node.leftNode);
-            } else if ((node.leftNode != null) && (node.leftNode.color == 0)) {
+            if (isGoingLeft(node)) {
                 badNode = checkLeft(node.leftNode);
             }
         }
         if (badNode == null) {
             return null;
         }
-        if ((node.leftNode == null) && (node.rightNode == null)) {
+        if (isNoChildren(node)) {
             return null;
-        } else if ((node.rightNode == null) && (badNode.color != node.leftNode.color)) {
-            return null;
-        } else if ((node.leftNode == null) && (badNode.color != node.rightNode.color)) {
+        } else if (isNeighborSameColor(node, badNode)) {
             return null;
         }
         return badNode;
     }
 
-    protected Node whoIsParent(Node node, Node nodeRoot) {
-        Node parentNode = nodeRoot;
-        if (node == nodeRoot) {
-            return null;
-        }
-        if ((parentNode.leftNode == node) || (parentNode.rightNode == node)) {
-            return parentNode;
-        }
-        if (node.number < parentNode.number) {
-            if (parentNode.leftNode != null) {
-                parentNode = whoIsParent(node, parentNode.leftNode);
-            }
-        } else {
-            if (parentNode.rightNode != null) {
-                parentNode = whoIsParent(node, parentNode.rightNode);
-            }
-        }
-        return parentNode;
 
-    }
-
-    public String show() {
-        return show1(nodeRoot);
+    public void show() {
+        showInside(nodeRoot);
     }
 
     public void remove(int number) {
@@ -288,9 +210,8 @@ public class Tree extends Node {
             return;
         }
         size--;
-
         Node parent = whoIsParent(removeNode, nodeRoot);
-        if ((removeNode.color == 1) && (removeNode.leftNode == null && removeNode.rightNode == null)) {
+        if ((isRed(removeNode)) && (removeNode.leftNode == null && removeNode.rightNode == null)) {
             if (parent.leftNode == removeNode) {
                 parent.leftNode = null;
             } else {
@@ -311,7 +232,7 @@ public class Tree extends Node {
             if (parent == null) {
                 nodeRoot = maxNode;
                 maxNode.leftNode = removeNode.leftNode;
-                nodeRoot.color = 0;
+                nodeRoot.setColor("Black");
                 return;
             }
             if (parent.leftNode == removeNode) {
@@ -332,36 +253,37 @@ public class Tree extends Node {
                 Node nodePointer = parent.rightNode.leftNode;
                 parent.rightNode = maxNode;
                 maxNode.leftNode = nodePointer;
-                maxNode.color = removeNode.color;
+                maxNode.setColor(removeNode.color);
             }
-            if (maxNode.color == 0 && maxNode.leftNode == null) balancingAfterRemoving(maxNode);
+            if (isBlack(maxNode) && maxNode.leftNode == null)
+                balancingAfterRemoving(maxNode);
             return;
         }
-        if (removeNode.color == 0 && (removeNode.leftNode != null || removeNode.rightNode != null)) {
+        if (isBlack(removeNode) && (removeNode.leftNode != null || removeNode.rightNode != null)) {
             if (removeNode.leftNode != null) {
                 if (parent.leftNode == removeNode) {
                     parent.leftNode = removeNode.leftNode;
-                    parent.leftNode.color = 0;
+                    parent.leftNode.setColor("Black");
                 } else {
                     parent.rightNode = removeNode.leftNode;
-                    parent.rightNode.color = 0;
+                    parent.rightNode.setColor("Black");
                 }
 
             } else {
                 if (nodeRoot == removeNode) {
                     nodeRoot = removeNode.rightNode;
-                    nodeRoot.color = 0;
+                    nodeRoot.setColor("Black");
                 } else if (parent.leftNode == removeNode) {
                     parent.leftNode = removeNode.rightNode;
-                    parent.leftNode.color = 0;
+                    parent.leftNode.setColor("Black");
                 } else {
                     parent.rightNode = removeNode.rightNode;
-                    parent.rightNode.color = 0;
+                    parent.rightNode.setColor("Black");
 
                 }
             }
         }
-        if (removeNode.color == 0 && (removeNode.leftNode == null && removeNode.rightNode == null)) {
+        if (isBlack(removeNode) && (removeNode.leftNode == null && removeNode.rightNode == null)) {
             if (parent.leftNode == removeNode) {
                 parent.leftNode = null;
             } else {
@@ -376,7 +298,7 @@ public class Tree extends Node {
 
     private Node search(int number, Node node) {
         Node nodePointer = node;
-        if (nodePointer == null) {
+        if (isNull(nodePointer)) {
             return null;
         }
         if (number == node.number) {
@@ -390,7 +312,7 @@ public class Tree extends Node {
 
     private Node searchOfMaxNumber(Node node) {
         Node nodePointer = node;
-        if (nodePointer.rightNode != null) {
+        if (isNotNull(nodePointer.rightNode)) {
             nodePointer = searchOfMaxNumber(node.rightNode);
         }
         return nodePointer;
@@ -399,103 +321,110 @@ public class Tree extends Node {
 
     private void balancingAfterRemoving(Node node) { //parent
         Node parent = whoIsParent(node, nodeRoot);// grandfather
-        if (parent == null) {
+        if (isNull(parent)) {
             parent = nodeRoot;
         }
-        if (node.leftNode == null) {
+        if (isNull(node.leftNode)) {
             Node nodePointer = new Node();
-            nodePointer.color = 0;
+            nodePointer.setColor("Black");
             node.leftNode = nodePointer;
-            if (parent.rightNode.rightNode == null) {
-                parent.rightNode.rightNode = new Node();
-                parent.rightNode.rightNode.color = 0;
+            Node child = parent.rightNode;
+            if (isNull(child.rightNode)) {
+                child.rightNode = new Node();
+                child.rightNode.setColor("Black");
             }
-            if (parent.rightNode.leftNode == null) {
-                parent.rightNode.leftNode = new Node();
-                parent.rightNode.leftNode.color = 0;
+            if (isNull(child.leftNode)) {
+                child.leftNode = new Node();
+                child.leftNode.setColor("Black");
             }
 
-            if (node.rightNode.color == 1 && node.rightNode.leftNode.color == 0) {//brother is black, one left child is red, but right child is black
+            if (isRed(node.rightNode) && isBlack(node.rightNode.leftNode)) {//brother is black, one left child is red, but right child is black
                 rotateRight(node, parent);
-                if (node.rightNode.leftNode != null) rotateLeft(node.rightNode.leftNode, node.rightNode);
-                if (node.rightNode.rightNode != null) rotateRight(node.rightNode, node);
-                if (node.leftNode == null && node.rightNode == null) {
+                if (isNotNull(child.leftNode)) {
+                    rotateLeft(node.rightNode.leftNode, node.rightNode);
+                }
+                if (isNotNull(child.rightNode)) {
+                    rotateRight(node.rightNode, node);
+                }
+                if (isNoChildren(node)) {
                     parent = whoIsParent(node, nodeRoot);
                     recoloringAfterRemoving(parent);
                 } else recoloringAfterRemoving(node);
 
-            } else if (parent.rightNode.rightNode.color == 0 && parent.rightNode.leftNode.color == 0) { // brother's black, children are black
+            } else if (isBlack(child.rightNode) && isBlack(child.leftNode)) { // brother's black, children are black
                 Node nephew = checkingNephew(node);
-                if (nephew != null && nephew.color == 1) {
+                if (isNotNull(nephew) && isRed(nephew)) {
                     if (node.rightNode.leftNode == nephew) { // TODO: 05.02.2023 указать, что если племянник левый то надо сначала повернуть направо и поменять цвет
                         rotateLeft(node.rightNode, node);
-                        nephew.color = 0;
-                        nephew.rightNode.color = 1;
+                        nephew.setColor("Black");
+                        nephew.rightNode.setColor("Red");
                         rotateLeft(node.rightNode, node);
                     } else {
                         rotateLeft(node.rightNode, node);
                     }
                     recoloringAfterRemoving(whoIsParent(node, nodeRoot));
-                } else if (parent.color == 1) {
-                    parent.color = 0;
-                    parent.rightNode.color = 1;
-                } else if (node.leftNode.color == 0 && node.rightNode.color == 0) {
+                } else if (isRed(parent)) {
+                    parent.setColor("Black");
+                    parent.rightNode.setColor("Red");
+                } else if (isBlack(node.leftNode) && isBlack(node.rightNode)) {
                     pushUp(node);
                 }
-                if ((node.rightNode != null && node.rightNode.color == 1) || (node.leftNode != null && node.leftNode.color == 1))
-                    if (parent.leftNode.color == 0) {
+                if ((isNotNull(node.rightNode) && isRed(node.rightNode)) || (isNotNull(node.leftNode) && isRed(node.leftNode)))
+                    if (isRed(parent.leftNode)) {
                         nodePointer = parent.leftNode;
-                        if (nodePointer.leftNode.color == 0 && nodePointer.rightNode.color == 0) { // TODO: 06.02.2023  вывести эту хрень в отдельный метод, параметром сделать nodePointer также сделать это и для другой стороны 
-                            if (nodePointer.leftNode.leftNode != null && nodePointer.leftNode.leftNode.color == 1)
-                                nodePointer.color = 1;
-                            if (nodePointer.leftNode.rightNode != null && nodePointer.leftNode.rightNode.color == 1)
-                                nodePointer.color = 1;
-
-                            if (nodePointer.rightNode.leftNode != null && nodePointer.rightNode.leftNode.color == 1)
-                                nodePointer.color = 1;
-                            if (nodePointer.rightNode.rightNode != null && nodePointer.rightNode.rightNode.color == 1)
-                                nodePointer.color = 1;
+                        if (isBlack(nodePointer.leftNode) && isBlack(nodePointer.rightNode)) { // TODO: 06.02.2023  вывести эту хрень в отдельный метод, параметром сделать nodePointer также сделать это и для другой стороны
+                            Node nodePointerChecker = nodePointer.leftNode;
+                            if (isNotNull(nodePointerChecker.leftNode) && isRed(nodePointerChecker.leftNode))
+                                nodePointer.setColor("Red");
+                            if (isNotNull(nodePointerChecker.rightNode) && isRed(nodePointerChecker.rightNode))
+                                nodePointer.setColor("Red");
+                            nodePointerChecker = nodePointer.rightNode;
+                            if (isNotNull(nodePointerChecker.leftNode) && isRed(nodePointerChecker.leftNode))
+                                nodePointer.setColor("Red");
+                            if (isNotNull(nodePointerChecker.rightNode) && isRed(nodePointerChecker.rightNode))
+                                nodePointer.setColor("Red");
                         }
                     }
 
 
-            } else if ((node.color == 1 && node.leftNode.color == 0) && parent.rightNode.color == 0) {
-                node.color = 0;
-                node.rightNode.color = 1;
-            } else if (parent.rightNode.rightNode.color == 1 || parent.rightNode.leftNode.color == 1) {// brother's black, one of his child is red
-                node.rightNode.color = 1;
+            } else if ((isRed(node) && isBlack(node.leftNode)) && isBlack(parent.rightNode)) {
+                node.setColor("Black");
+                node.rightNode.setColor("Red");
+            } else if (isRed(parent.rightNode.rightNode) || isRed(parent.rightNode.leftNode)) {// brother's black, one of his child is red
+                node.rightNode.setColor("Red");
                 rotateLeft(parent.rightNode, parent);
                 if (whoIsParent(parent, nodeRoot) != nodeRoot) {
                     reverseRecoloring(whoIsParent(parent, nodeRoot));
                 }
             }
-            if ((node.leftNode != null && node.leftNode.color == 0 && node.rightNode != null && node.rightNode.color == 0) && node.rightNode.leftNode != null && node.rightNode.leftNode.color == 1) {// Проверка на красного племянника при удалении красной вершины
+            if ((isNotNull(node.leftNode) && isBlack(node.leftNode) && isNotNull(node.rightNode) && isBlack(node.rightNode)) && isNotNull(node.rightNode.leftNode) && isRed(node.rightNode.leftNode)) {// Проверка на красного племянника при удалении красной вершины
                 rotateRight(node.rightNode.leftNode, node.rightNode);
                 node.leftNode = null;
                 rotateLeft(node.rightNode, node);
                 recoloringAfterRemoving(whoIsParent(node, nodeRoot));
             }
 
-            if (parent.rightNode.leftNode != null && parent.rightNode.leftNode.number == 0)
-                parent.rightNode.leftNode = null;
-            if (parent.rightNode.rightNode != null && parent.rightNode.rightNode.number == 0)
-                parent.rightNode.rightNode = null;
+            if (isNotNull(child.leftNode) && child.leftNode.number == 0)
+                child.leftNode = null;
+            if (isNotNull(child.rightNode) && child.rightNode.number == 0)
+                child.rightNode = null;
 
-        } else if (node.rightNode == null) {
+        } else if (isNull(node.rightNode)) {
 
             Node nodePointer = new Node();
-            nodePointer.color = 0;
+            nodePointer.setColor("Black");
             node.rightNode = nodePointer;
-            if (parent.leftNode.rightNode == null) {
-                parent.leftNode.rightNode = new Node();
-                parent.leftNode.rightNode.color = 0;
+            Node child = parent.leftNode;
+            if (isNull(child.rightNode)) { //TODO вынести в отдельный метод
+                child.rightNode = new Node();
+                child.rightNode.setColor("Black");
             }
-            if (parent.leftNode.leftNode == null) {
-                parent.leftNode.leftNode = new Node();
-                parent.leftNode.leftNode.color = 0;
+            if (isNull(child.leftNode)) {
+                child.leftNode = new Node();
+                child.leftNode.setColor("Black");
             }
 
-            if (node.leftNode.color == 1 && node.leftNode.rightNode.color == 0) {//brother is black, one left child is red, but right child is black
+            if (isRed(node.leftNode) && isBlack(node.leftNode.rightNode)) {//brother is black, one left child is red, but right child is black
                 rotateLeft(node, parent);
 
                 if (node.leftNode.rightNode != null) rotateLeft(node.leftNode.rightNode, node.leftNode);
@@ -507,57 +436,59 @@ public class Tree extends Node {
                 } else recoloringAfterRemoving(node);
 
 
-            } else if (parent.leftNode.leftNode.color == 0 && parent.leftNode.rightNode.color == 0) { // brother's black, children are black
-                if (parent.color == 1) {
-                    parent.color = 0;
-                    parent.leftNode.color = 1;
-                    node.rightNode.color = 1;
-                    node.leftNode.color = 1;
+            } else if (isBlack(child.leftNode) && isBlack(child.rightNode)) { // brother's black, children are black
+                if (parent.color.equalsIgnoreCase("Red")) {
+                    parent.setColor("Black");
+                    child.setColor("Red");
+                    node.rightNode.setColor("Red");
+                    node.leftNode.setColor("Red");
 
                 } else {
                     pushUp(node);
 
 
                 }
-            } else if (parent.rightNode.rightNode.color == 1 || parent.rightNode.leftNode.color == 1) {// brother's black, one of his child is red
-                node.leftNode.color = 1;
+            } else if (isRed(parent.rightNode.rightNode) || isRed(parent.rightNode.leftNode)) {// brother's black, one of his child is red
+                node.leftNode.setColor("Red");
                 rotateRight(parent.leftNode, parent);
                 reverseRecoloring(whoIsParent(parent, nodeRoot));
             }
-            if ((node.leftNode != null && node.leftNode.color == 0 && node.rightNode != null && node.rightNode.color == 0) && node.rightNode.leftNode != null && node.rightNode.leftNode.color == 1) {// Проверка на красного племянника при удалении красной вершины
+            if ((node.leftNode != null && isBlack(node.leftNode) && node.rightNode != null && isBlack(node.rightNode)) && node.rightNode.leftNode != null && isRed(node.rightNode.leftNode)) {// Проверка на красного племянника при удалении красной вершины
                 rotateRight(node.rightNode.leftNode, node.rightNode);
                 node.leftNode = null;
                 rotateLeft(node.rightNode, node);
                 recoloringAfterRemoving(whoIsParent(node, nodeRoot));
             }
 
-            if (parent.leftNode.leftNode != null && parent.leftNode.leftNode.number == 0)
-                parent.leftNode.leftNode = null;
-            if (parent.leftNode.rightNode != null && parent.leftNode.rightNode.number == 0)
-                parent.leftNode.rightNode = null;
+            if (isNotNull(child.leftNode) && child.leftNode.number == 0)
+                child.leftNode = null;
+            if (isNotNull(child.rightNode) && child.rightNode.number == 0)
+                child.rightNode = null;
 
 
         } else {
-            if (parent.leftNode.rightNode.color == 1 && parent.leftNode.leftNode.color == 1) {
-                node.leftNode.color = 0;
-            } else if (parent.leftNode.rightNode.color == 1 || parent.leftNode.leftNode.color == 1) {
+            if (isRed(parent.leftNode.rightNode) && isRed(parent.leftNode.leftNode)) {
+                node.leftNode.setColor("Black");
+            } else if (isRed(parent.leftNode.rightNode) || isRed(parent.leftNode.leftNode)) {
                 rotateRight(parent.rightNode, parent);
                 reverseRecoloring(whoIsParent(parent, nodeRoot));
             }
 
 
         }
-        if (node.leftNode != null && node.leftNode.number == 0) node.leftNode = null;
-        if (node.rightNode != null && node.rightNode.number == 0) node.rightNode = null;
-
-
+        if (isNotNull(node.leftNode) && node.leftNode.number == 0) {
+            node.leftNode = null;
+        }
+        if (isNotNull(node.rightNode) && node.rightNode.number == 0) {
+            node.rightNode = null;
+        }
     }
 
 
     private void recoloringAfterRemoving(Node node) {
         Node parent = whoIsParent(node, nodeRoot);
         Node grandparent = whoIsParent(parent, nodeRoot);
-        if (grandparent != null) {
+        if (isNotNull(grandparent)) {
             if (grandparent.leftNode == parent) {
                 parent.color = grandparent.rightNode.color;
             } else parent.color = grandparent.leftNode.color;
@@ -565,28 +496,30 @@ public class Tree extends Node {
         if (parent.leftNode == node) {
             node.color = parent.rightNode.color;
         } else node.color = parent.leftNode.color;
-        if (node.leftNode != null && node.rightNode != null) {
-            if (parent.color == 1) {
-                node.color = 0;
+        if (isNotNull(node.leftNode) && isNotNull(node.rightNode)) {
+            if (isRed(parent)) {
+                node.setColor("Black");
             } else {
-                node.color = 1;
+                node.setColor("Red");
             }
-            if (parent.leftNode.color == 0) node.color = 0;
-            node.rightNode.color = 0;
-            node.leftNode.color = 0;
+            if (isBlack(parent.leftNode)) {
+                node.color = "Black";
+            }
+            node.rightNode.setColor("Black");
+            node.leftNode.setColor("Black");
         } else {
-            if (node.leftNode != null) node.leftNode.color = 1;
-            else node.rightNode.color = 1;
+            if (node.leftNode != null) node.leftNode.setColor("Red");
+            else node.rightNode.setColor("Red");
         }
     }
 
     private void reverseRecoloring(Node parent) {
-        parent.color = 1;
-        if (parent.leftNode != null) {
-            parent.leftNode.color = 0;
+        parent.setColor("Red");
+        if (isNotNull(parent.leftNode)) {
+            parent.leftNode.setColor("Black");
         }
-        if (parent.rightNode != null) {
-            parent.rightNode.color = 0;
+        if (isNotNull(parent.rightNode)) {
+            parent.rightNode.setColor("Black");
         }
     }
 
@@ -595,24 +528,26 @@ public class Tree extends Node {
             parent.leftNode = maxNode;
             removeNode.leftNode.color = maxNode.color;
             maxNode.rightNode = removeNode.rightNode;
-
-
         } else {
             parent.rightNode = maxNode;
             removeNode.rightNode.color = maxNode.color;
             maxNode.rightNode = removeNode.rightNode;
         }
-        if (maxNode.leftNode == null || maxNode.rightNode == null) maxNode.color = removeNode.color;
+        if (isNull(maxNode.leftNode) || isNull(maxNode.rightNode)) {
+            maxNode.color = removeNode.color;
+        }
         balancingAfterRemoving(maxNode);
 
     }
 
     private Node checkingNephew(Node node) {
         Node nodePointer = node.rightNode;
-        if (nodePointer == null) return null;
-        if (nodePointer.rightNode != null) {
+        if (isNull(nodePointer)) {
+            return null;
+        }
+        if (isNotNull(nodePointer.rightNode)) {
             return nodePointer.rightNode;
-        } else if (nodePointer.leftNode != null) {
+        } else if (isNull(nodePointer.leftNode)) {
             return nodePointer.leftNode;
         } else {
             nodePointer = node.leftNode;
@@ -627,10 +562,101 @@ public class Tree extends Node {
 
 
     private void pushUp(Node node) {
-        node.color = 0;
-        node.rightNode.color = 1;
-        node.leftNode.color = 1;
+        node.setColor("Black");
+        node.rightNode.setColor("Red");
+        node.leftNode.setColor("Red");
+    }
 
+    private void putIntoTree(int number) {
+        Node checkingBadNode;
+        Node nodePointer = nodeRoot;
+        Node addNode = new Node(number);
+        while (true) {
+            if (nodePointer.number > addNode.number && nodePointer.leftNode != null) {
+                nodePointer = nodePointer.leftNode;
+            } else if (nodePointer.number < addNode.number && nodePointer.rightNode != null) {
+                nodePointer = nodePointer.rightNode;
+            } else if (nodePointer.number == addNode.number) {
+                size--;
+                return;
+            } else {
+                break;
+            }
+        }
+        if (nodePointer.number > addNode.number) {
+            nodePointer.leftNode = addNode;
+        } else {
+            nodePointer.rightNode = addNode;
+        }
+        checkingBadNode = checkRight(nodeRoot);
+        if (checkingBadNode != null) {
+            optionsToBalance(checkingBadNode);
+        }
+        checkingBadNode = checkLeft(nodeRoot);
+        if (checkingBadNode != null) {
+            optionsToBalance(checkingBadNode);
+        }
+    }
+
+
+    private boolean empty() {
+        return size == 0;
+    }
+
+    private boolean isNull(Node node) {
+        return node == null;
+    }
+
+    private boolean isNotNull(Node node) {
+        return node != null;
+    }
+
+    // Блок условий optionToBalance
+    private boolean isRightBrotherRed(Node parent) {
+        return parent.rightNode != null && parent.rightNode.color.equalsIgnoreCase("Red");
+    }
+
+    private boolean isLeftBrotherRed(Node parent) {
+        return parent.leftNode != null && parent.leftNode.color.equalsIgnoreCase("Red");
+    }
+
+    //Блок условий на RotateLeft/Right
+
+    private boolean isLeftNodeBlack(Node node) {
+        return node.leftNode == null || node.leftNode.color.equalsIgnoreCase("Black");
+    }
+
+    private boolean isRightNodeBlack(Node node) {
+        return node.rightNode == null || node.rightNode.color.equalsIgnoreCase("Black");
+    }
+
+    //Блок условий CheckLeft/Right
+    private boolean isGoingLeft(Node node) {
+        return (node.leftNode != null) && (!node.color.equals(node.leftNode.color)) || (node.leftNode != null) && (node.leftNode.color.equalsIgnoreCase("Black"));
+    }
+
+    private boolean isGoingRight(Node node) {
+        return (node.rightNode != null) && (!node.color.equals(node.rightNode.color)) || (node.rightNode != null) && (node.rightNode.color.equalsIgnoreCase("Black"));
+    }
+
+    private boolean isNoChildren(Node node) {
+        return (isNull(node.leftNode) && (isNull(node.rightNode)));
+    }
+
+    private boolean isNeighborSameColor(Node node, Node badNode) {
+        return (node.rightNode == null) && (!badNode.color.equals(node.leftNode.color)) || (node.leftNode == null) && (!badNode.color.equals(node.rightNode.color));
+    }
+
+    private boolean isRed(Node node) {
+        return node.color.equalsIgnoreCase("Red");
+    }
+
+    private boolean isBlack(Node node) {
+        return node.color.equalsIgnoreCase("Black");
+    }
+
+    public Node getNodeRoot() {
+        return nodeRoot;
     }
 
     private Boolean checkForChild(Node node, Node parent) {
@@ -642,6 +668,9 @@ public class Tree extends Node {
     }
 
 }
+
+
+
 
 
 

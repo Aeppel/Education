@@ -4,7 +4,7 @@ public class Node {
     protected Node rightNode;
     protected Node leftNode;
     protected int number;
-    protected int color = 1;
+    protected String color = "Red";
     protected Node nodeRoot;
 
 
@@ -16,29 +16,62 @@ public class Node {
     }
 
 
-    protected String show1(Node node) {
-        String result = "";
+    protected StringBuilder showInside(Node node) {
+        StringBuilder result = new StringBuilder("");
         if (leftNode != null) {
-            result = leftNode.show1(node.leftNode);
+            result.append(leftNode.showInside(node.leftNode));
         }
-        result += " " + this.number;
+        result.append(" ").append(this.number);
         if (rightNode != null) {
-            result += rightNode.show1(node.rightNode);
+            result.append(rightNode.showInside(node.rightNode));
         }
         return result;
+    }
+
+    protected void setColor(String color) {
+        this.color = color;
+    }
+
+    protected void recoloring(Node parent, Node nodeRoot) {
+        parent.setColor("Red");
+        if (parent.leftNode != null) {
+            parent.leftNode.setColor("Black");
+        }
+        if (parent.rightNode != null) {
+            parent.rightNode.setColor("Black");
+        }
+        nodeRoot.setColor("Black");
+    }
+
+    protected Node whoIsParent(Node node, Node nodeRoot) {
+        Node parentNode = nodeRoot;
+        if (node == nodeRoot) {
+            return null;
+        }
+        if ((parentNode.leftNode == node) || (parentNode.rightNode == node)) {
+            return parentNode;
+        }
+        if (node.number < parentNode.number) {
+            if (parentNode.leftNode != null) {
+                parentNode = whoIsParent(node, parentNode.leftNode);
+            }
+        } else {
+            if (parentNode.rightNode != null) {
+                parentNode = whoIsParent(node, parentNode.rightNode);
+            }
+        }
+        return parentNode;
     }
 
     public int getNumber() {
         return number;
     }
 
-    public int getColor() {
+    public String getColor() {
         return color;
     }
 
-    public Node getNodeRoot() {
-        return nodeRoot;
-    }
+
 
     public Node getLeftNode() {
         return leftNode;

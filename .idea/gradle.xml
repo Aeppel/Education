@@ -22,6 +22,8 @@
             <option value="$PROJECT_DIR$/base/matrix" />
             <option value="$PROJECT_DIR$/base/montecarlo" />
             <option value="$PROJECT_DIR$/base/tickets" />
+            <option value="$PROJECT_DIR$/multithreading" />
+            <option value="$PROJECT_DIR$/multithreading/writersandreaders" />
           </set>
         </option>
       </GradleProjectSettings>

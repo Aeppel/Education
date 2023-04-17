@@ -17,4 +17,7 @@ include 'base:array'
 findProject(':base:array')?.name = 'array'
 include 'algorithms:Tree'
 findProject(':algorithms:Tree')?.name = 'Tree'
+include 'multithreading'
+include 'multithreading:writersandreaders'
+findProject(':multithreading:writersandreaders')?.name = 'writersandreaders'
 

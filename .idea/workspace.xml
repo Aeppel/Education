@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0216894-aab8-4de5-938c-9516de93fb1c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/algorithms/tree/src/test/java/org/pervishkond/tree/TestTree.java" afterDir="false" />
+    <list default="true" id="fa0ecc74-89dd-47ba-a3da-d8f57800ac70" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithms/tree/src/test/java/org/pervishkond/tree/TestTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/algorithms/tree/src/test/java/org/pervishkond/tree/TestTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +185,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="TestTree.testAdd" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="TestTree.testRemove" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -197,7 +198,7 @@
           <list>
             <option value=":algorithms:Tree:test" />
             <option value="--tests" />
-            <option value="&quot;TestTree.testAdd&quot;" />
+            <option value="&quot;org.pervishkond.tree.TestTree.testRemove&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -233,17 +234,17 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.TestTree.setTestTree (1)" />
+        <item itemvalue="Gradle.TestTree.testRemove" />
+        <item itemvalue="Gradle.TestTree.setTestTree" />
         <item itemvalue="Gradle.TestTree.testAdd (1)" />
         <item itemvalue="Gradle.TestTree.testRotateLeft" />
-        <item itemvalue="Gradle.TestTree.setTestTree" />
-        <item itemvalue="Gradle.TestTree.testAdd" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a0216894-aab8-4de5-938c-9516de93fb1c" name="Changes" comment="" />
+      <changelist id="fa0ecc74-89dd-47ba-a3da-d8f57800ac70" name="Changes" comment="" />
       <created>1669047084309</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -301,6 +302,17 @@
     <option name="localTasksCounter" value="8" />
     <servers />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -333,33 +345,39 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Main.java</url>
-          <line>86</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Main.java</url>
-          <line>81</line>
-          <option name="timeStamp" value="15" />
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
+          <line>207</line>
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/algorithms/tree/src/test/java/org/pervishkond/tree/TestTree.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="26" />
+          <line>37</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/test/java/org/pervishkond/tree/TestTree.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
+          <line>396</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
+          <line>392</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
+          <line>394</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
-          <line>399</line>
-          <properties class="org.pervishkond.tree.Tree" method="balancingAfterRemoving">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
-          <line>582</line>
-          <properties class="org.pervishkond.tree.Tree" method="reverseRecoloring">
+          <line>588</line>
+          <properties class="org.pervishkond.tree.Tree">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
@@ -367,8 +385,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
-          <line>93</line>
-          <properties class="org.pervishkond.tree.Tree" method="rotateLeft">
+          <line>98</line>
+          <properties class="org.pervishkond.tree.Tree">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
@@ -376,12 +394,21 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
-          <line>635</line>
-          <properties class="org.pervishkond.tree.Tree" method="checkForChild">
+          <line>321</line>
+          <properties class="org.pervishkond.tree.Tree" method="balancingAfterRemoving">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="24" />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/algorithms/tree/src/main/java/org/pervishkond/tree/Tree.java</url>
+          <line>52</line>
+          <properties class="org.pervishkond.tree.Tree" method="rotateLeft">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
