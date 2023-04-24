@@ -3,6 +3,8 @@
 !src/**/build/
 
 ### IntelliJ IDEA ###
+
+.idea/gradle.xml
 .idea/workspace.xml
 .idea/modules.xml
 .idea/jarRepositories.xml

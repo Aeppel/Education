@@ -44,76 +44,76 @@ public class TestTree extends Tree {
 
     @Test
     public void testAdd() {
-        checkOfAddingNodeRoot();
-        checkForSettingAndColorLeftChild();
-        checkForSettingAndColorRightChild();
-        checkForSettingAndColorGrandLeftChildOfRightChild();
-        checkForSettingAndColorGrandRightChildOfRightChild();
+        assertAddingNodeRoot();
+        assertSettingAndColorLeftChild();
+        assertSettingAndColorRightChild();
+        assertSettingAndColorGrandLeftChildOfRightChild();
+        assertSettingAndColorGrandRightChildOfRightChild();
     }
 
 
-    private void checkOfAddingNodeRoot() {
+    private void assertAddingNodeRoot() {
         Assertions.assertEquals(testTree.getNodeRoot().getNumber(), attempt2);
-        Assertions.assertEquals(testTree.getNodeRoot().getColor(), "Black");
+        Assertions.assertEquals(testTree.getNodeRoot().getColor(), Colors.BLACK);
     }
 
-    private void checkForSettingAndColorLeftChild() {
+    private void assertSettingAndColorLeftChild() {
         Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getNumber(), attempt3);
-        Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getColor(), "Black");
+        Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getColor(), Colors.BLACK);
     }
 
-    private void checkForSettingAndColorRightChild() {
+    private void assertSettingAndColorRightChild() {
         Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getNumber(), attempt4);
-        Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getColor(), "Black");
+        Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getColor(), Colors.BLACK);
     }
 
-    private void checkForSettingAndColorGrandLeftChildOfRightChild() {
+    private void assertSettingAndColorGrandLeftChildOfRightChild() {
         Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getLeftNode().getNumber(), attempt1);
-        Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getLeftNode().getColor(), "Red");
+        Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getLeftNode().getColor(), Colors.RED);
     }
 
-    private void checkForSettingAndColorGrandRightChildOfRightChild() {
+    private void assertSettingAndColorGrandRightChildOfRightChild() {
         Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getRightNode().getNumber(), attempt5);
-        Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getRightNode().getColor(), "Red");
+        Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getRightNode().getColor(), Colors.RED);
 
     }
 
     @Test
     public void testRemove(int number) {
         testTree.remove(number);
-        checkNodeRootAfterRemoving();
-        checkLeftChildAfterRemoving();
-        checkRightChildAfterRemoving();
-        checkGrandRightChildOfLeftChild();
+        assertNodeRootAfterRemoving();
+        assertLeftChildAfterRemoving();
+        assertRightChildAfterRemoving();
+        assertGrandRightChildOfLeftChild();
     }
 
-    private void checkNodeRootAfterRemoving() {
+    private void assertNodeRootAfterRemoving() {
         Assertions.assertEquals(testTree.getNodeRoot().getNumber(), attempt4);
-        Assertions.assertEquals(testTree.getNodeRoot().getColor(), "Black");
+        Assertions.assertEquals(testTree.getNodeRoot().getColor(), Colors.BLACK);
     }
 
-    private void checkLeftChildAfterRemoving() {
+    private void assertLeftChildAfterRemoving() {
         Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getNumber(), attempt2);
-        Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getColor(), "Black");
+        Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getColor(), Colors.BLACK);
     }
 
-    private void checkRightChildAfterRemoving() {
+    private void assertRightChildAfterRemoving() {
         Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getNumber(), attempt5);
-        Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getColor(), "Black");
+        Assertions.assertEquals(testTree.getNodeRoot().getRightNode().getColor(), Colors.BLACK);
     }
 
-    private void checkGrandRightChildOfLeftChild() {
+    private void assertGrandRightChildOfLeftChild() {
         Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getRightNode().getNumber(), attempt1);
-        Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getRightNode().getColor(), "Red");
+        Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getRightNode().getColor(), Colors.RED);
     }
 
     @Test
     public void testRotateLeft(Node node, Node node2) {
         testTree.rotateLeft(node, node2);
-        checkNodeRootAfterRemoving();
-        checkLeftChildAfterRemoving();
-        checkRightChildAfterRemoving();
-        checkGrandRightChildOfLeftChild();
+        assertNodeRootAfterRemoving();
+        assertLeftChildAfterRemoving();
+        assertRightChildAfterRemoving();
+        assertGrandRightChildOfLeftChild();
     }
 
 
