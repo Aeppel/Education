@@ -4,13 +4,15 @@ public class Node {
     protected Node rightNode;
     protected Node leftNode;
     protected int number;
-    protected Colors color = Colors.RED;
+    protected Colors color;
     protected Node nodeRoot;
 
     public Node() {
+        setColor(Colors.BLACK);
     }
 
     protected Node(int number) {
+        setColor(Colors.RED);
         this.number = number;
     }
 
@@ -51,8 +53,8 @@ public class Node {
         }
     }
 
-    protected void deleteRecoloring() {
-        Node parent = searchParentNode(nodeRoot);
+    protected void deleteRecoloring(Node nodeRoot) {
+        Node parent = this.searchParentNode(nodeRoot);
         Node grandparent = parent.searchParentNode(nodeRoot);
         if (isNotNull(grandparent)) {
             if (grandparent.getLeftNode() == parent) {
@@ -159,7 +161,7 @@ public class Node {
         return node != null;
     }
 
-    // Блок условий optionToBalance
+    //------------------Блок условий optionToBalance--------------------------------
     protected boolean isRightBrotherRed(Node parent) {
         return parent.getRightNode() != null && parent.getRightNode().color == Colors.RED;
     }
@@ -168,8 +170,7 @@ public class Node {
         return parent.getLeftNode() != null && parent.getLeftNode().color == Colors.RED;
     }
 
-    //Блок условий на RotateLeft/Right
-
+    //------------------Блок условий на RotateLeft/Right-----------------------------
     protected boolean isLeftNodeBlack(Node node) {
         return node.getLeftNode() == null || node.getLeftNode().color == Colors.BLACK;
     }
@@ -178,7 +179,7 @@ public class Node {
         return node.getRightNode() == null || node.getRightNode().color == Colors.BLACK;
     }
 
-    //Блок условий CheckLeft/Right
+    //------------------Блок условий CheckLeft/Right---------------------------------
     protected boolean isLeftNodeBlackTooOrDifferentColor(Node node) {
         return (node.leftNode != null) && (node.color != node.getLeftNode().color) || (node.getLeftNode() != null) && (node.getLeftNode().color == Colors.BLACK);
     }

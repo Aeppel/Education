@@ -318,16 +318,13 @@ class Tree extends Node {
         }
         if (isNull(node.getLeftNode())) {
             Node nodePointer = new Node();
-            nodePointer.setColor(Colors.BLACK);
             node.setLeftNode(nodePointer);
             Node child = parent.getRightNode();
             if (isNull(child.getRightNode())) {
                 child.setRightNode(new Node());
-                child.getRightNode().setColor(Colors.BLACK);
             }
             if (isNull(child.getLeftNode())) {
                 child.setLeftNode(new Node());
-                child.getLeftNode().setColor(Colors.BLACK);
             }
 
             if (isRed(node.getRightNode()) && isBlack(node.getLeftGrandchildOfRightChild())) {//brother is black, one left child is red, but right child is black
@@ -340,8 +337,8 @@ class Tree extends Node {
                 }
                 if (isNoChildren(node)) {
                     parent = node.searchParentNode(getNodeRoot());
-                    parent.deleteRecoloring();
-                } else node.deleteRecoloring();
+                    parent.deleteRecoloring(nodeRoot);
+                } else node.deleteRecoloring(nodeRoot);
 
             } else if (isBlack(child.getRightNode()) && isBlack(child.getLeftNode())) { // brother's black, children are black
                 Node nephew = checkingNephew(node);
@@ -354,7 +351,7 @@ class Tree extends Node {
                     } else {
                         rotateLeft(node.getRightNode(), node);
                     }
-                    node.searchParentNode(getNodeRoot()).deleteRecoloring();
+                    node.searchParentNode(getNodeRoot()).deleteRecoloring(nodeRoot);
                 } else if (isRed(parent)) {
                     parent.setColor(Colors.BLACK);
                     parent.getRightNode().setColor(Colors.RED);
@@ -393,7 +390,7 @@ class Tree extends Node {
                 rotateRight(node.getLeftGrandchildOfRightChild(), node.getRightNode());
                 node.setLeftNode(null);
                 rotateLeft(node.getRightNode(), node);
-                node.searchParentNode(getNodeRoot()).deleteRecoloring();
+                node.searchParentNode(getNodeRoot()).deleteRecoloring(nodeRoot);
             }
 
             if (isNotNull(child.getLeftNode()) && child.getLeftNode().number == 0)
@@ -404,16 +401,14 @@ class Tree extends Node {
         } else if (isNull(node.getRightNode())) {
 
             Node nodePointer = new Node();
-            nodePointer.setColor(Colors.BLACK);
+
             node.setRightNode(nodePointer);
             Node child = parent.getLeftNode();
             if (isNull(child.getRightNode())) {
                 child.setRightNode(new Node());
-                child.getRightNode().setColor(Colors.BLACK);
             }
             if (isNull(child.getLeftNode())) {
                 child.setLeftNode(new Node());
-                child.getLeftNode().setColor(Colors.BLACK);
             }
 
             if (isRed(node.getLeftNode()) && isBlack(node.getRightGrandchildOfLeftChild())) {
@@ -428,8 +423,8 @@ class Tree extends Node {
 
                 if (node.getLeftNode() == null && node.getRightNode() == null) {
                     parent = node.searchParentNode(getNodeRoot());
-                    parent.deleteRecoloring();
-                } else node.deleteRecoloring();
+                    parent.deleteRecoloring(nodeRoot);
+                } else node.deleteRecoloring(nodeRoot);
 
 
             } else if (isBlack(child.getLeftNode()) && isBlack(child.getRightNode())) {
@@ -452,7 +447,7 @@ class Tree extends Node {
                 rotateRight(node.getLeftGrandchildOfRightChild(), node.getRightNode());
                 node.setLeftNode(null);
                 rotateLeft(node.getRightNode(), node);
-                node.searchParentNode(getNodeRoot()).deleteRecoloring();
+                node.searchParentNode(getNodeRoot()).deleteRecoloring(nodeRoot);
             }
 
             if (isNotNull(child.getLeftNode()) && child.getLeftNode().number == 0)
@@ -563,10 +558,6 @@ class Tree extends Node {
         }
         return null;
     }
-
-
-
-
 
 
 }
