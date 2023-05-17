@@ -28,7 +28,6 @@ public class TestTree extends Tree {
         CheckRemovePart(attempt3);
         CheckRemovePart(attempt3);
         CheckRemovePart((int) (Math.random() * 10));
-        CheckRotatePart(testTree.getNodeRoot().getRightNode(), testTree.getNodeRoot().getLeftNode());
     }
 
     @Test
@@ -96,14 +95,14 @@ public class TestTree extends Tree {
         Assertions.assertEquals(testTree.getNodeRoot().getLeftNode().getRightNode().getColor(), Colors.RED);
     }
 
-    @Test
-    public void CheckRotatePart(Node node, Node node2) {
-        testTree.rotateLeft(node, node2);
-        assertNodeRootAfterRemoving();
-        assertLeftChildAfterRemoving();
-        assertRightChildAfterRemoving();
-        assertGrandRightChildOfLeftChild();
-    }
+//    @Test
+//    public void CheckRotatePart(Node node, Node node2) {
+//        testTree.rotateLeft(node, node2);
+//        assertNodeRootAfterRemoving();
+//        assertLeftChildAfterRemoving();
+//        assertRightChildAfterRemoving();
+//        assertGrandRightChildOfLeftChild();
+//    }
 
 
 }

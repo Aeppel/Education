@@ -1,11 +1,14 @@
 package org.pervishkond.tree;
 
+import java.util.StringJoiner;
+
 public class Node {
     protected Node rightNode;
     protected Node leftNode;
-    protected int number;
-    protected Colors color;
-    protected Node nodeRoot;
+    private int number;
+    private Colors color;
+
+    private Node parent;
 
     public Node() {
         setColor(Colors.BLACK);
@@ -16,14 +19,19 @@ public class Node {
         this.number = number;
     }
 
+    protected Node(int number, Colors color) {
+        setColor(color);
+        this.number = number;
+    }
 
-    protected StringBuilder showTree(StringBuilder result) {
+
+    protected StringJoiner showTree(StringJoiner result) {
         if (this.getLeftNode() != null) {
-            result.append(this.getLeftNode().showTree(result));
+            result.merge(this.getLeftNode().showTree(result));
         }
-        result.append(" ").append(this.number);
+        result.add(String.valueOf(this.number));
         if (this.getRightNode() != null) {
-            result.append(this.getRightNode().showTree(result));
+            result.merge(this.getRightNode().showTree(result));
         }
         return result;
     }
@@ -45,18 +53,18 @@ public class Node {
 
     protected void reverseRecoloring() {
         this.setColor(Colors.RED);
-        if (isNotNull(this.getLeftNode())) {
+        if (Utils.isNotNull(this.getLeftNode())) {
             this.getLeftNode().setColor(Colors.BLACK);
         }
-        if (isNotNull(this.getRightNode())) {
+        if (Utils.isNotNull(this.getRightNode())) {
             this.getRightNode().setColor(Colors.BLACK);
         }
     }
 
     protected void deleteRecoloring(Node nodeRoot) {
-        Node parent = this.searchParentNode(nodeRoot);
-        Node grandparent = parent.searchParentNode(nodeRoot);
-        if (isNotNull(grandparent)) {
+        Node parent = this.getParent();
+        Node grandparent = parent.getParent();
+        if (Utils.isNotNull(grandparent)) {
             if (grandparent.getLeftNode() == parent) {
                 parent.color = grandparent.getRightNode().color;
             } else parent.color = grandparent.getLeftNode().color;
@@ -64,13 +72,13 @@ public class Node {
         if (parent.getLeftNode() == this) {
             this.color = parent.getRightNode().color;
         } else this.color = parent.getLeftNode().color;
-        if (isNotNull(this.getLeftNode()) && isNotNull(this.getRightNode())) {
-            if (isRed(parent)) {
+        if (Utils.isNotNull(this.getLeftNode()) && Utils.isNotNull(this.getRightNode())) {
+            if (Utils.isRed(parent)) {
                 this.setColor(Colors.BLACK);
             } else {
                 this.setColor(Colors.RED);
             }
-            if (isBlack(parent.getLeftNode())) {
+            if (Utils.isBlack(parent.getLeftNode())) {
                 this.setColor(Colors.BLACK);
             }
             this.getRightNode().setColor(Colors.BLACK);
@@ -82,25 +90,35 @@ public class Node {
         }
     }
 
+    //    protected Node searchParentNode(Node nodeRoot) {
+//        Node parentNode = nodeRoot;
+//        if (this == nodeRoot) {
+//            return null;
+//        }
+//        if ((parentNode.getLeftNode() == this) || (parentNode.getRightNode() == this)) {
+//            return parentNode;
+//        }
+//        if (this.number < parentNode.number) {
+//            if (parentNode.getLeftNode() != null) {
+//                parentNode = this.searchParentNode(parentNode.getLeftNode());
+//            }
+//        } else {
+//            if (parentNode.getRightNode() != null) {
+//                parentNode = this.searchParentNode(parentNode.getRightNode());
+//            }
+//        }
+//        return parentNode;
+//    }
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
-    protected Node searchParentNode(Node nodeRoot) {
-        Node parentNode = nodeRoot;
-        if (this == nodeRoot) {
-            return null;
-        }
-        if ((parentNode.getLeftNode() == this) || (parentNode.getRightNode() == this)) {
-            return parentNode;
-        }
-        if (this.number < parentNode.number) {
-            if (parentNode.getLeftNode() != null) {
-                parentNode = this.searchParentNode(parentNode.getLeftNode());
-            }
-        } else {
-            if (parentNode.getRightNode() != null) {
-                parentNode = this.searchParentNode(parentNode.getRightNode());
-            }
-        }
-        return parentNode;
+    public void setParent(Node node) {
+        this.parent = node;
+    }
+
+    public Node getParent() {
+        return parent;
     }
 
     public int getNumber() {
@@ -111,114 +129,46 @@ public class Node {
         return color;
     }
 
-    protected void setLeftNode(Node node) {
+    public void setLeftNode(Node node) {
         this.leftNode = node;
     }
 
-    protected void setRightNode(Node node) {
+    public void setRightNode(Node node) {
         this.rightNode = node;
     }
 
-    protected void setLeftNodeRightChild(Node node) {
+    public void setLeftNodeRightChild(Node node) {
         this.leftNode.rightNode = node;
     }
 
-    protected void setRightNodeLeftChild(Node node) {
+    public void setRightNodeLeftChild(Node node) {
         this.rightNode.leftNode = node;
     }
 
 
-    protected Node getLeftNode() {
+    public Node getLeftNode() {
         return this.leftNode;
     }
 
-    protected Node getRightNode() {
+    public Node getRightNode() {
         return this.rightNode;
     }
 
 
-    protected Node getLeftGrandchildOfRightChild() {
+    public Node getLeftGrandchildOfRightChild() {
         return this.rightNode.leftNode;
     }
 
-    protected Node getRightGrandchildOfRightChild() {
+    public Node getRightGrandchildOfRightChild() {
         return this.rightNode.rightNode;
     }
 
-    protected Node getLeftGrandchildOfLeftChild() {
+    public Node getLeftGrandchildOfLeftChild() {
         return this.leftNode.leftNode;
     }
 
-    protected Node getRightGrandchildOfLeftChild() {
+    public Node getRightGrandchildOfLeftChild() {
         return this.leftNode.rightNode;
     }
-
-    protected boolean isNull(Node node) {
-        return node == null;
-    }
-
-    protected boolean isNotNull(Node node) {
-        return node != null;
-    }
-
-    //------------------Блок условий optionToBalance--------------------------------
-    protected boolean isRightBrotherRed(Node parent) {
-        return parent.getRightNode() != null && parent.getRightNode().color == Colors.RED;
-    }
-
-    protected boolean isLeftBrotherRed(Node parent) {
-        return parent.getLeftNode() != null && parent.getLeftNode().color == Colors.RED;
-    }
-
-    //------------------Блок условий на RotateLeft/Right-----------------------------
-    protected boolean isLeftNodeBlack(Node node) {
-        return node.getLeftNode() == null || node.getLeftNode().color == Colors.BLACK;
-    }
-
-    protected boolean isRightNodeBlack(Node node) {
-        return node.getRightNode() == null || node.getRightNode().color == Colors.BLACK;
-    }
-
-    //------------------Блок условий CheckLeft/Right---------------------------------
-    protected boolean isLeftNodeBlackTooOrDifferentColor(Node node) {
-        return (node.leftNode != null) && (node.color != node.getLeftNode().color) || (node.getLeftNode() != null) && (node.getLeftNode().color == Colors.BLACK);
-    }
-
-    protected boolean isRightNodeBlackTooOrDifferentColor(Node node) {
-        return (node.getRightNode() != null) && (node.color != node.getRightNode().color) || (node.getRightNode() != null) && (node.getRightNode().color == Colors.BLACK);
-    }
-
-    protected boolean isNoChildren(Node node) {
-        return (isNull(node.getLeftNode()) && (isNull(node.getRightNode())));
-    }
-
-    protected boolean isNeighborSameColor(Node node, Node badNode) {
-        return (node.getRightNode() == null) && (badNode.color != node.getLeftNode().color) || (node.getLeftNode() == null) && (badNode.color != node.getRightNode().color);
-    }
-
-    protected boolean isRed(Node node) {
-        return node.color == Colors.RED;
-    }
-
-    protected boolean isBlack(Node node) {
-        return node.color == Colors.BLACK;
-    }
-
-    protected boolean isMore(Node node, Node checkNode) {
-        return checkNode.number > node.number && nodeRoot.getLeftNode() != null;
-    }
-
-    protected boolean isLess(Node node, Node checkNode) {
-        return checkNode.number < node.number && nodeRoot.getRightNode() != null;
-    }
-
-    protected boolean isEqual(Node node, Node checkNode) {
-        return checkNode.number == node.number;
-
-    }
-
-    protected boolean IsNotNullAndRed(Node node) {
-        return isNotNull(node) && isRed(node);
-    }
-
 }
+
