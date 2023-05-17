@@ -69,6 +69,14 @@ class Utils {
         return isNotNull(node) && isRed(node);
     }
 
+    public static void put(Node toPut) {
+        if (toPut.getParent().getNumber() > toPut.getNumber()) {
+            toPut.getParent().setLeftNode(toPut);
+        } else {
+            toPut.getParent().setRightNode(toPut);
+        }
+    }
+
 }
 
 

@@ -12,9 +12,13 @@ class Tree {
             nodeRoot = new Node(number, Colors.BLACK);
             size++;
         } else {
-            Node addNode = searchPlace(new Node(number), getNodeRoot());
-            if (Utils.isNotNull(addNode)) {
-                put(addNode);
+            Node parentNode = searchPlace(new Node(number), getNodeRoot());
+            if (Utils.isNotNull(parentNode)) {
+                size++;
+                Node toPut = new Node(number);
+                toPut.setParent(parentNode);
+                Utils.put(toPut);
+                checkForRebalance();
             }
         }
     }
@@ -537,30 +541,18 @@ class Tree {
         return nodeRoot;
     }
 
-    private Node searchPlace(Node addNode, Node node) {
-        if (Utils.isMore(addNode, node)) {
-            addNode = searchPlace(addNode, node.getLeftNode());
-        } else if (Utils.isLess(addNode, node)) {
-            addNode = searchPlace(addNode, node.getRightNode());
+    private Node searchPlace(Node toPut, Node node) {
+        if (Utils.isMore(toPut, node)) {
+            node = searchPlace(toPut, node.getLeftNode());
+        } else if (Utils.isLess(toPut, node)) {
+            node = searchPlace(toPut, node.getRightNode());
         }
-        if (Utils.isEquals(addNode, node)) {
+        if (Utils.isEquals(node, toPut)) {
             return null;
         }
-        if (Utils.isNull(addNode.getParent())) {
-            addNode.setParent(node);
-        }
-        return addNode;
+        return node;
     }
 
-    private void put(Node addNode) {
-        if (addNode.getParent().getNumber() > addNode.getNumber()) {
-            addNode.getParent().setLeftNode(addNode);
-        } else {
-            addNode.getParent().setRightNode(addNode);
-        }
-        size++;
-        checkForRebalance();
-    }
 
     private void checkForRebalance() {
         Node NodeForBalance = checkRight(nodeRoot);

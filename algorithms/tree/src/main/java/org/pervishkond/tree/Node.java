@@ -89,30 +89,6 @@ public class Node {
             } else this.getRightNode().setColor(Colors.RED);
         }
     }
-
-    //    protected Node searchParentNode(Node nodeRoot) {
-//        Node parentNode = nodeRoot;
-//        if (this == nodeRoot) {
-//            return null;
-//        }
-//        if ((parentNode.getLeftNode() == this) || (parentNode.getRightNode() == this)) {
-//            return parentNode;
-//        }
-//        if (this.number < parentNode.number) {
-//            if (parentNode.getLeftNode() != null) {
-//                parentNode = this.searchParentNode(parentNode.getLeftNode());
-//            }
-//        } else {
-//            if (parentNode.getRightNode() != null) {
-//                parentNode = this.searchParentNode(parentNode.getRightNode());
-//            }
-//        }
-//        return parentNode;
-//    }
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
     public void setParent(Node node) {
         this.parent = node;
     }
