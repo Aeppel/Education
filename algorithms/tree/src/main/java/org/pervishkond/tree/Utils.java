@@ -61,7 +61,7 @@ class Utils {
         return checkNode.getNumber() < node.getNumber() && checkNode.getRightNode() != null;
     }
 
-    public static boolean nullOrEquals(Node addNode, Node checkNode) {
+    public static boolean isEquals(Node addNode, Node checkNode) {
         return addNode == null || addNode.getNumber() == checkNode.getNumber();
     }
 
