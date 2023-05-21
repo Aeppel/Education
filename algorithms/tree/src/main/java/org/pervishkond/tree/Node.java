@@ -3,20 +3,76 @@ package org.pervishkond.tree;
 import java.util.StringJoiner;
 
 public class Node {
-    protected Node rightNode;
-    protected Node leftNode;
+    private Node rightNode;
+    private Node leftNode;
     private int number;
     private Colors color;
-
     private Node parent;
 
     public Node() {
         setColor(Colors.BLACK);
     }
 
-    protected Node(int number) {
+    public Node(int number) {
         setColor(Colors.RED);
         this.number = number;
+    }
+
+
+    public void setParent(Node node) {
+        this.parent = node;
+    }
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public Colors getColor() {
+        return color;
+    }
+
+    public void setLeftNode(Node node) {
+        this.leftNode = node;
+    }
+
+    public Node getLeftNode() {
+        return this.leftNode;
+    }
+
+    public void setRightNode(Node node) {
+        this.rightNode = node;
+    }
+
+    public Node getRightNode() {
+        return this.rightNode;
+    }
+
+    public void setLeftGrandchildOfRightChild(Node node) {
+        this.leftNode.rightNode = node;
+    }
+
+    public Node getLeftGrandchildOfRightChild() {
+        return this.rightNode.leftNode;
+    }
+
+    public void setRightGrandchildOfRightChild(Node node) {
+        this.rightNode.leftNode = node;
+    }
+
+    public Node getRightGrandchildOfRightChild() {
+        return this.rightNode.rightNode;
+    }
+
+    public Node getLeftGrandchildOfLeftChild() {
+        return this.leftNode.leftNode;
+    }
+
+    public Node getRightGrandchildOfLeftChild() {
+        return this.leftNode.rightNode;
     }
 
     protected Node(int number, Colors color) {
@@ -24,14 +80,13 @@ public class Node {
         this.number = number;
     }
 
-
     protected StringJoiner showTree(StringJoiner result) {
-        if (this.getLeftNode() != null) {
-            result.merge(this.getLeftNode().showTree(result));
+        if (Utils.isNotNull(this.getLeftNode())) {
+            this.getLeftNode().showTree(result);
         }
         result.add(String.valueOf(this.number));
-        if (this.getRightNode() != null) {
-            result.merge(this.getRightNode().showTree(result));
+        if (Utils.isNotNull(this.getRightNode())) {
+            this.getRightNode().showTree(result);
         }
         return result;
     }
@@ -61,8 +116,8 @@ public class Node {
         }
     }
 
-    protected void deleteRecoloring(Node nodeRoot) {
-        Node parent = this.getParent();
+    protected void deleteRecoloring() {
+        parent = this.getParent();
         Node grandparent = parent.getParent();
         if (Utils.isNotNull(grandparent)) {
             if (grandparent.getLeftNode() == parent) {
@@ -71,13 +126,16 @@ public class Node {
         }
         if (parent.getLeftNode() == this) {
             this.color = parent.getRightNode().color;
-        } else this.color = parent.getLeftNode().color;
-        if (Utils.isNotNull(this.getLeftNode()) && Utils.isNotNull(this.getRightNode())) {
+        } else {
+            this.color = parent.getLeftNode().color;
+        }
+        if (Utils.IsChildren(this)) {
             if (Utils.isRed(parent)) {
                 this.setColor(Colors.BLACK);
             } else {
                 this.setColor(Colors.RED);
             }
+
             if (Utils.isBlack(parent.getLeftNode())) {
                 this.setColor(Colors.BLACK);
             }
@@ -86,65 +144,10 @@ public class Node {
         } else {
             if (this.getLeftNode() != null) {
                 this.getLeftNode().setColor(Colors.RED);
-            } else this.getRightNode().setColor(Colors.RED);
+            } else {
+                this.getRightNode().setColor(Colors.RED);
+            }
         }
-    }
-    public void setParent(Node node) {
-        this.parent = node;
-    }
-
-    public Node getParent() {
-        return parent;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public Colors getColor() {
-        return color;
-    }
-
-    public void setLeftNode(Node node) {
-        this.leftNode = node;
-    }
-
-    public void setRightNode(Node node) {
-        this.rightNode = node;
-    }
-
-    public void setLeftNodeRightChild(Node node) {
-        this.leftNode.rightNode = node;
-    }
-
-    public void setRightNodeLeftChild(Node node) {
-        this.rightNode.leftNode = node;
-    }
-
-
-    public Node getLeftNode() {
-        return this.leftNode;
-    }
-
-    public Node getRightNode() {
-        return this.rightNode;
-    }
-
-
-    public Node getLeftGrandchildOfRightChild() {
-        return this.rightNode.leftNode;
-    }
-
-    public Node getRightGrandchildOfRightChild() {
-        return this.rightNode.rightNode;
-    }
-
-    public Node getLeftGrandchildOfLeftChild() {
-        return this.leftNode.leftNode;
-    }
-
-    public Node getRightGrandchildOfLeftChild() {
-        return this.leftNode.rightNode;
     }
 }
 

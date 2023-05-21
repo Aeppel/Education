@@ -12,15 +12,25 @@ class Tree {
             nodeRoot = new Node(number, Colors.BLACK);
             size++;
         } else {
-            Node parentNode = searchPlace(new Node(number), getNodeRoot());
-            if (Utils.isNotNull(parentNode)) {
-                size++;
-                Node toPut = new Node(number);
-                toPut.setParent(parentNode);
-                Utils.put(toPut);
-                checkForRebalance();
+            Node parentNode = searchPlaceToPut(new Node(number), getNodeRoot());
+            if (Utils.isNull(parentNode)) {
+                return;
             }
+            size++;
+            Node toPut = new Node(number);
+            toPut.setParent(parentNode);
+            Utils.put(toPut);
+            checkToRebalance();
         }
+    }
+
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public Node getNodeRoot() {
+        return nodeRoot;
     }
 
     private void rebalance(Node node) {
@@ -43,18 +53,118 @@ class Tree {
             } else {
                 parent.recoloring(getNodeRoot());
             }
-            Node NodeForBalance = checkLeft(getNodeRoot());
-            if (Utils.isNotNull(NodeForBalance)) {
-                rebalance(NodeForBalance);
+            Node toBalance = checkLeft(getNodeRoot());
+            if (Utils.isNotNull(toBalance)) {
+                rebalance(toBalance);
             }
-            NodeForBalance = checkRight(getNodeRoot());
-            if (Utils.isNotNull(NodeForBalance)) {
-                rebalance(NodeForBalance);
+            toBalance = checkRight(getNodeRoot());
+            if (Utils.isNotNull(toBalance)) {
+                rebalance(toBalance);
             }
         }
     }
 
-    protected void rotateLeft(Node node, Node parent) {
+    public void show() {
+        StringJoiner result = new StringJoiner(", ");
+        nodeRoot.showTree(result);
+        System.out.println(result);
+    }
+
+    public void remove(int number) {
+        Node removeNode = search(number, getNodeRoot());
+        if (Utils.isNull(removeNode)) {
+            return;
+        }
+        size--;
+        if ((Utils.isRed(removeNode)) && (removeNode.getLeftNode() == null && removeNode.getRightNode() == null)) {
+            if (removeNode.getParent().getLeftNode() == removeNode) {
+                removeNode.getParent().setLeftNode(null);
+            } else {
+                removeNode.getParent().setRightNode(null);
+            }
+            return;
+        }
+        if (removeNode.getLeftNode() != null && removeNode.getRightNode() != null) {
+            Node maxNode = searchOfMaxNumber(removeNode.getLeftNode());
+            if (maxNode == removeNode.getLeftNode()) {
+                swap(maxNode, removeNode, removeNode.getParent());
+                return;
+            }
+            if (checkingNephew(maxNode) == null) {
+                maxNode.getParent().setRightNode(null);
+                maxNode.setRightNode(removeNode.getRightNode());
+                removeNode.getRightNode().setParent(maxNode);
+            }
+            if (removeNode.getParent() == null) {
+                nodeRoot = maxNode;
+                maxNode.setLeftNode(removeNode.getLeftNode());
+                getNodeRoot().setColor(Colors.BLACK);
+                nodeRoot.setParent(null);
+                removeNode.getLeftNode().setParent(maxNode);
+                return;
+            }
+            if (removeNode.getParent().getLeftNode() == removeNode) {
+                if (maxNode.getLeftNode() != null) {
+                    maxNode.getLeftNode().setColor(maxNode.getColor());
+                    maxNode.getParent().setRightNode(maxNode.getLeftNode());
+                    maxNode.getLeftNode().setParent(maxNode.getParent());
+                }
+                Node nodePointer = removeNode.getParent().getLeftGrandchildOfLeftChild();
+                removeNode.getParent().setLeftNode(maxNode);
+                maxNode.setParent(removeNode.getParent());
+                maxNode.setLeftNode(nodePointer);
+                maxNode.getLeftNode().setParent(maxNode);
+                maxNode.setColor(removeNode.getColor());
+
+            } else {
+                if (maxNode.getRightNode() != null) {
+                    maxNode.getParent().setRightNode(maxNode.getLeftNode());
+                    maxNode.getLeftNode().setParent(maxNode.getParent());
+                }
+                Node nodePointer = removeNode.getParent().getLeftGrandchildOfRightChild();
+                removeNode.getParent().setRightNode(maxNode);
+                maxNode.setLeftNode(nodePointer);
+                maxNode.setColor(removeNode.getColor());
+                removeNode.getParent().getRightNode().setParent(removeNode.getParent());
+                removeNode.getParent().getLeftNode().setParent(removeNode.getParent());
+            }
+            if (Utils.isBlack(maxNode) && maxNode.getLeftNode() == null)
+                balancingAfterRemoving(maxNode);
+            return;
+        }
+        if (Utils.isBlack(removeNode) && (removeNode.getLeftNode() != null || removeNode.getRightNode() != null)) {
+            if (removeNode.getLeftNode() != null) {
+                if (removeNode.getParent().getLeftNode() == removeNode) {
+                    removeNode.getParent().setLeftNode(removeNode.getLeftNode());
+                    removeNode.getParent().getLeftNode().setColor(Colors.BLACK);
+                } else {
+                    removeNode.getParent().setRightNode(removeNode.getLeftNode());
+                    removeNode.getParent().getRightNode().setColor(Colors.BLACK);
+                }
+            } else {
+                if (getNodeRoot() == removeNode) {
+                    nodeRoot = (removeNode.getRightNode());
+                    getNodeRoot().setColor(Colors.BLACK);
+                } else if (removeNode.getParent().getLeftNode() == removeNode) {
+                    removeNode.getParent().setLeftNode(removeNode.getRightNode());
+                    removeNode.getParent().getLeftNode().setColor(Colors.BLACK);
+                } else {
+                    removeNode.getParent().setRightNode(removeNode.getRightNode());
+                    removeNode.getParent().getRightNode().setColor(Colors.BLACK);
+                }
+            }
+        }
+        if (Utils.isBlack(removeNode) && (removeNode.getLeftNode() == null && removeNode.getRightNode() == null)) {
+            if (removeNode.getParent().getLeftNode() == removeNode) {
+                removeNode.getParent().setLeftNode(null);
+            } else {
+                removeNode.getParent().setRightNode(null);
+            }
+            balancingAfterRemoving(removeNode.getParent());
+        }
+    }
+
+    private void rotateLeft(Node node, Node parent) {
         Node nodePointer = node.getLeftNode();
         if (Utils.isLeftNodeBlack(node)) {
             node.setColor(Colors.BLACK);
@@ -76,12 +186,11 @@ class Tree {
             node.getLeftNode().setParent(node);
         } else if (Utils.isRightNodeBlack(node)) {
             nodePointer = node.getRightGrandchildOfLeftChild();
-            node.setLeftNodeRightChild(node);
+            node.setLeftGrandchildOfRightChild(node);
             parent.setRightNode(node.getLeftNode());
             node.setLeftNode(nodePointer);
             node.getLeftNode().setParent(node);
             node.setParent(nodePointer);
-
         } else if (Utils.isNull(parent.getLeftNode()) || parent.getLeftNode().getNumber() == 0) {
             nodePointer = getNodeRoot();
             if (parent == getNodeRoot()) {
@@ -103,13 +212,13 @@ class Tree {
                     grandParent.setRightNode(node);
                     grandParent.getRightNode().setParent(grandParent);
                 }
-                node.setLeftNodeRightChild(nodePointer);
+                node.setLeftGrandchildOfRightChild(nodePointer);
                 parent.recoloring(getNodeRoot());
             }
         }
     }
 
-    protected void rotateRight(Node node, Node parent) {
+    private void rotateRight(Node node, Node parent) {
         Node nodePointer = node.getRightNode();
         if (Utils.isRightNodeBlack(node)) {
             node.setColor(Colors.BLACK);
@@ -131,12 +240,11 @@ class Tree {
             node.getRightNode().setParent(node);
         } else if (Utils.isLeftNodeBlack(node)) {
             nodePointer = node.getLeftGrandchildOfRightChild();
-            node.setRightNodeLeftChild(node);
+            node.setRightGrandchildOfRightChild(node);
             parent.setLeftNode(node.getRightNode());
             node.setRightNode(nodePointer);
             node.getRightNode().setParent(node);
             node.setParent(nodePointer);
-
         } else if (Utils.isNull(parent.getRightNode())) {
             nodePointer = getNodeRoot();
             if (parent == getNodeRoot()) {
@@ -156,145 +264,44 @@ class Tree {
                     grandParent.setLeftNode(node);
                     grandParent.getLeftNode().setParent(grandParent);
                 }
-                node.setRightNodeLeftChild(nodePointer);
+                node.setRightGrandchildOfRightChild(nodePointer);
                 parent.recoloring(getNodeRoot());
             }
         }
     }
 
-    protected Node checkRight(Node node) {
-        Node NodeForBalance = null;
+    private Node checkRight(Node node) {
+        Node toBalance = null;
         if (Utils.isLeftNodeBlackTooOrDifferentColor(node)) {
-            NodeForBalance = checkRight(node.getLeftNode());
+            toBalance = checkRight(node.getLeftNode());
         }
-        if (Utils.isNull(NodeForBalance)) {
-            NodeForBalance = node;
+        if (Utils.isNull(toBalance)) {
+            toBalance = node;
             if (Utils.isRightNodeBlackTooOrDifferentColor(node)) {
-                NodeForBalance = checkRight(node.getRightNode());
+                toBalance = checkRight(node.getRightNode());
             }
         }
-        if (Utils.isNull(NodeForBalance) || Utils.isNoChildren(node) || Utils.isNeighborSameColor(node, NodeForBalance)) {
+        if (Utils.isNull(toBalance) || Utils.isNoChildren(node) || Utils.isNeighborSameColor(node, toBalance)) {
             return null;
         }
-        return NodeForBalance;
+        return toBalance;
     }
 
-    protected Node checkLeft(Node node) {
-        Node NodeForBalance = null;
+    private Node checkLeft(Node node) {
+        Node toBalance = null;
         if (Utils.isRightNodeBlackTooOrDifferentColor(node)) {
-            NodeForBalance = checkLeft(node.getRightNode());
+            toBalance = checkLeft(node.getRightNode());
         }
-        if (NodeForBalance == null) {
-            NodeForBalance = node;
+        if (toBalance == null) {
+            toBalance = node;
             if (Utils.isLeftNodeBlackTooOrDifferentColor(node)) {
-                NodeForBalance = checkLeft(node.getLeftNode());
+                toBalance = checkLeft(node.getLeftNode());
             }
         }
-        if (NodeForBalance == null || Utils.isNoChildren(node) || Utils.isNeighborSameColor(node, NodeForBalance)) {
+        if (toBalance == null || Utils.isNoChildren(node) || Utils.isNeighborSameColor(node, toBalance)) {
             return null;
         }
-        return NodeForBalance;
-    }
-
-    public void show() {
-        StringJoiner result = new StringJoiner(", ");
-        getNodeRoot().showTree(result);
-    }
-
-    public void remove(int number) {
-        Node removeNode = search(number, getNodeRoot());
-        if (removeNode == null) {
-            return;
-        }
-        size--;
-        Node parent = removeNode.getParent();
-        if ((Utils.isRed(removeNode)) && (removeNode.getLeftNode() == null && removeNode.getRightNode() == null)) {
-            if (parent.getLeftNode() == removeNode) {
-                parent.setLeftNode(null);
-            } else {
-                parent.setRightNode(null);
-            }
-            return;
-        }
-        if (removeNode.getLeftNode() != null && removeNode.getRightNode() != null) {
-            Node maxNode = searchOfMaxNumber(removeNode.getLeftNode());
-            if (maxNode == removeNode.getLeftNode()) {
-                swap(maxNode, removeNode, parent);
-                return;
-            }
-            Node parentMaxNode = maxNode.getParent();
-            if (checkingNephew(maxNode) == null) {
-                parentMaxNode.setRightNode(null);
-                maxNode.setRightNode(removeNode.getRightNode());
-                removeNode.getRightNode().setParent(maxNode);
-            }
-            if (parent == null) {
-                nodeRoot = maxNode;
-                maxNode.setLeftNode(removeNode.getLeftNode());
-                getNodeRoot().setColor(Colors.BLACK);
-                nodeRoot.setParent(null);
-                removeNode.getLeftNode().setParent(maxNode);
-                return;
-            }
-            if (parent.getLeftNode() == removeNode) {
-                if (maxNode.getLeftNode() != null) {
-                    maxNode.getLeftNode().setColor(maxNode.getColor());
-                    parentMaxNode.setRightNode(maxNode.getLeftNode());
-                    maxNode.getLeftNode().setParent(parentMaxNode);
-                }
-                Node nodePointer = parent.getLeftGrandchildOfLeftChild();
-                parent.setLeftNode(maxNode);
-                maxNode.setParent(parent);
-                maxNode.setLeftNode(nodePointer);
-                maxNode.getLeftNode().setParent(maxNode);
-                maxNode.setColor(removeNode.getColor());
-
-            } else {
-                if (maxNode.getRightNode() != null) {
-                    parentMaxNode.setRightNode(maxNode.getLeftNode());
-                    maxNode.getLeftNode().setParent(parentMaxNode);
-                }
-                Node nodePointer = parent.getLeftGrandchildOfRightChild();
-                parent.setRightNode(maxNode);
-                maxNode.setLeftNode(nodePointer);
-                maxNode.setColor(removeNode.getColor());
-                parent.getRightNode().setParent(parent);
-                parent.getLeftNode().setParent(parent);
-            }
-            if (Utils.isBlack(maxNode) && maxNode.getLeftNode() == null)
-                balancingAfterRemoving(maxNode);
-            return;
-        }
-        if (Utils.isBlack(removeNode) && (removeNode.getLeftNode() != null || removeNode.getRightNode() != null)) {
-            if (removeNode.getLeftNode() != null) {
-                if (parent.getLeftNode() == removeNode) {
-                    parent.setLeftNode(removeNode.getLeftNode());
-                    parent.getLeftNode().setColor(Colors.BLACK);
-                } else {
-                    parent.setRightNode(removeNode.getLeftNode());
-                    parent.getRightNode().setColor(Colors.BLACK);
-                }
-            } else {
-                if (getNodeRoot() == removeNode) {
-                    nodeRoot = (removeNode.getRightNode());
-                    getNodeRoot().setColor(Colors.BLACK);
-                } else if (parent.getLeftNode() == removeNode) {
-                    parent.setLeftNode(removeNode.getRightNode());
-                    parent.getLeftNode().setColor(Colors.BLACK);
-                } else {
-                    parent.setRightNode(removeNode.getRightNode());
-                    parent.getRightNode().setColor(Colors.BLACK);
-                }
-            }
-        }
-        if (Utils.isBlack(removeNode) && (removeNode.getLeftNode() == null && removeNode.getRightNode() == null)) {
-            if (parent.getLeftNode() == removeNode) {
-                parent.setLeftNode(null);
-            } else {
-                parent.setRightNode(null);
-            }
-            balancingAfterRemoving(parent);
-        }
+        return toBalance;
     }
 
 
@@ -322,23 +329,22 @@ class Tree {
     }
 
     private void balancingAfterRemoving(Node node) { //parent
-        Node parent = node.getParent();// grandfather
-        if (Utils.isNull(parent)) {
-            parent = getNodeRoot();
+        Node grandParent = node.getParent();
+        if (Utils.isNull(grandParent)) {
+            grandParent = getNodeRoot();
         }
         if (Utils.isNull(node.getLeftNode())) {
             Node nodePointer = new Node();
             node.setLeftNode(nodePointer);
-            Node child = parent.getRightNode();
+            Node child = grandParent.getRightNode();
             if (Utils.isNull(child.getRightNode())) {
                 child.setRightNode(new Node());
             }
             if (Utils.isNull(child.getLeftNode())) {
                 child.setLeftNode(new Node());
             }
-
             if (Utils.isRed(node.getRightNode()) && Utils.isBlack(node.getLeftGrandchildOfRightChild())) {//brother is black, one left child is red, but right child is black
-                rotateRight(node, parent);
+                rotateRight(node, grandParent);
                 if (Utils.isNotNull(child.getLeftNode())) {
                     rotateLeft(node.getLeftGrandchildOfRightChild(), node.getRightNode());
                 }
@@ -346,10 +352,9 @@ class Tree {
                     rotateRight(node.getRightNode(), node);
                 }
                 if (Utils.isNoChildren(node)) {
-                    parent = node.getParent();
-                    parent.deleteRecoloring(nodeRoot);
-                } else node.deleteRecoloring(nodeRoot);
-
+                    grandParent = node.getParent();
+                    grandParent.deleteRecoloring();
+                } else node.deleteRecoloring();
             } else if (Utils.isBlack(child.getRightNode()) && Utils.isBlack(child.getLeftNode())) { // brother's black, children are black
                 Node nephew = checkingNephew(node);
                 if (Utils.isNotNull(nephew) && Utils.isRed(nephew)) {
@@ -361,16 +366,16 @@ class Tree {
                     } else {
                         rotateLeft(node.getRightNode(), node);
                     }
-                    node.getParent().deleteRecoloring(nodeRoot);
-                } else if (Utils.isRed(parent)) {
-                    parent.setColor(Colors.BLACK);
-                    parent.getRightNode().setColor(Colors.RED);
+                    node.getParent().deleteRecoloring();
+                } else if (Utils.isRed(grandParent)) {
+                    grandParent.setColor(Colors.BLACK);
+                    grandParent.getRightNode().setColor(Colors.RED);
                 } else if (Utils.isBlack(node.getLeftNode()) && Utils.isBlack(node.getRightNode())) {
                     pushUp(node);
                 }
                 if ((Utils.isNotNull(node.getRightNode()) && Utils.isRed(node.getRightNode())) || (Utils.isNotNull(node.getLeftNode()) && Utils.isRed(node.getLeftNode())))
-                    if (Utils.isRed(parent.getLeftNode())) {
-                        nodePointer = parent.getLeftNode();
+                    if (Utils.isRed(grandParent.getLeftNode())) {
+                        nodePointer = grandParent.getLeftNode();
                         if (Utils.isBlack(nodePointer.getLeftNode()) && Utils.isBlack(nodePointer.getRightNode())) {
                             Node nodePointerChecker = nodePointer.getLeftNode();
                             if (Utils.isNotNullAndRed(nodePointerChecker.getLeftNode()))
@@ -386,21 +391,21 @@ class Tree {
                     }
 
 
-            } else if ((Utils.isRed(node) && Utils.isBlack(node.getLeftNode())) && Utils.isBlack(parent.getRightNode())) {
+            } else if ((Utils.isRed(node) && Utils.isBlack(node.getLeftNode())) && Utils.isBlack(grandParent.getRightNode())) {
                 node.setColor(Colors.BLACK);
                 node.getRightNode().setColor(Colors.RED);
-            } else if (Utils.isRed(parent.getRightGrandchildOfRightChild()) || Utils.isRed(parent.getLeftGrandchildOfRightChild())) {
+            } else if (Utils.isRed(grandParent.getRightGrandchildOfRightChild()) || Utils.isRed(grandParent.getLeftGrandchildOfRightChild())) {
                 node.getRightNode().setColor(Colors.RED);
-                rotateLeft(parent.getRightNode(), parent);
-                if (parent.getParent() != getNodeRoot()) {
-                    parent.getParent().reverseRecoloring();
+                rotateLeft(grandParent.getRightNode(), grandParent);
+                if (grandParent.getParent() != getNodeRoot()) {
+                    grandParent.getParent().reverseRecoloring();
                 }
             }
             if ((Utils.isNotNull(node.getLeftNode()) && Utils.isBlack(node.getLeftNode()) && Utils.isNotNull(node.getRightNode()) && Utils.isBlack(node.getRightNode())) && Utils.isNotNull(node.getLeftGrandchildOfRightChild()) && Utils.isRed(node.getLeftGrandchildOfRightChild())) {// Проверка на красного племянника при удалении красной вершины
                 rotateRight(node.getLeftGrandchildOfRightChild(), node.getRightNode());
                 node.setLeftNode(null);
                 rotateLeft(node.getRightNode(), node);
-                node.getParent().deleteRecoloring(nodeRoot);
+                node.getParent().deleteRecoloring();
             }
 
             if (Utils.isNotNull(child.getLeftNode()) && child.getLeftNode().getNumber() == 0)
@@ -409,57 +414,47 @@ class Tree {
                 child.setRightNode(null);
 
         } else if (Utils.isNull(node.getRightNode())) {
-
             Node nodePointer = new Node();
-
             node.setRightNode(nodePointer);
-            Node child = parent.getLeftNode();
+            Node child = grandParent.getLeftNode();
             if (Utils.isNull(child.getRightNode())) {
                 child.setRightNode(new Node());
             }
             if (Utils.isNull(child.getLeftNode())) {
                 child.setLeftNode(new Node());
             }
-
             if (Utils.isRed(node.getLeftNode()) && Utils.isBlack(node.getRightGrandchildOfLeftChild())) {
-                rotateLeft(node, parent);
-
+                rotateLeft(node, grandParent);
                 if (node.getRightGrandchildOfLeftChild() != null) {
                     rotateLeft(node.getRightGrandchildOfLeftChild(), node.getLeftNode());
                 }
                 if (node.getLeftGrandchildOfLeftChild() != null) {
                     rotateRight(node.getLeftNode(), node);
                 }
-
                 if (node.getLeftNode() == null && node.getRightNode() == null) {
-                    parent = node.getParent();
-                    parent.deleteRecoloring(nodeRoot);
-                } else node.deleteRecoloring(nodeRoot);
-
-
+                    grandParent = node.getParent();
+                    grandParent.deleteRecoloring();
+                } else node.deleteRecoloring();
             } else if (Utils.isBlack(child.getLeftNode()) && Utils.isBlack(child.getRightNode())) {
-                if (parent.getColor() == Colors.RED) {
-                    parent.setColor(Colors.BLACK);
+                if (grandParent.getColor() == Colors.RED) {
+                    grandParent.setColor(Colors.BLACK);
                     child.setColor(Colors.RED);
                     node.getRightNode().setColor(Colors.RED);
                     node.getLeftNode().setColor(Colors.RED);
-
                 } else {
                     pushUp(node);
                 }
-
-            } else if (Utils.isRed(parent.getRightGrandchildOfRightChild()) || Utils.isRed(parent.getLeftGrandchildOfRightChild())) {
+            } else if (Utils.isRed(grandParent.getRightGrandchildOfRightChild()) || Utils.isRed(grandParent.getLeftGrandchildOfRightChild())) {
                 node.getLeftNode().setColor(Colors.RED);
-                rotateRight(parent.getLeftNode(), parent);
-                parent.getParent().reverseRecoloring();
+                rotateRight(grandParent.getLeftNode(), grandParent);
+                grandParent.getParent().reverseRecoloring();
             }
             if ((node.getLeftNode() != null && Utils.isBlack(node.getLeftNode()) && node.getRightNode() != null && Utils.isBlack(node.getRightNode())) && node.getLeftGrandchildOfRightChild() != null && Utils.isRed(node.getLeftGrandchildOfRightChild())) {// Проверка на красного племянника при удалении красной вершины
                 rotateRight(node.getLeftGrandchildOfRightChild(), node.getRightNode());
                 node.setLeftNode(null);
                 rotateLeft(node.getRightNode(), node);
-                node.getParent().deleteRecoloring(nodeRoot);
+                node.getParent().deleteRecoloring();
             }
-
             if (Utils.isNotNull(child.getLeftNode()) && child.getLeftNode().getNumber() == 0)
                 child.setLeftNode(null);
             if (Utils.isNotNull(child.getRightNode()) && child.getRightNode().getNumber() == 0)
@@ -467,11 +462,11 @@ class Tree {
 
 
         } else {
-            if (Utils.isRed(parent.getRightGrandchildOfLeftChild()) && Utils.isRed(parent.getLeftGrandchildOfLeftChild())) {
+            if (Utils.isRed(grandParent.getRightGrandchildOfLeftChild()) && Utils.isRed(grandParent.getLeftGrandchildOfLeftChild())) {
                 node.getLeftNode().setColor(Colors.BLACK);
-            } else if (Utils.isRed(parent.getRightGrandchildOfLeftChild()) || Utils.isRed(parent.getLeftGrandchildOfLeftChild())) {
-                rotateRight(parent.getRightNode(), parent);
-                parent.getParent().reverseRecoloring();
+            } else if (Utils.isRed(grandParent.getRightGrandchildOfLeftChild()) || Utils.isRed(grandParent.getLeftGrandchildOfLeftChild())) {
+                rotateRight(grandParent.getRightNode(), grandParent);
+                grandParent.getParent().reverseRecoloring();
             }
 
 
@@ -504,7 +499,6 @@ class Tree {
             maxNode.getRightNode().setParent(maxNode);
         }
         balancingAfterRemoving(maxNode);
-
     }
 
     private Node checkingNephew(Node node) {
@@ -533,19 +527,11 @@ class Tree {
         node.getLeftNode().setColor(Colors.RED);
     }
 
-    private boolean isEmpty() {
-        return size == 0;
-    }
-
-    public Node getNodeRoot() {
-        return nodeRoot;
-    }
-
-    private Node searchPlace(Node toPut, Node node) {
+    private Node searchPlaceToPut(Node toPut, Node node) {
         if (Utils.isMore(toPut, node)) {
-            node = searchPlace(toPut, node.getLeftNode());
+            node = searchPlaceToPut(toPut, node.getLeftNode());
         } else if (Utils.isLess(toPut, node)) {
-            node = searchPlace(toPut, node.getRightNode());
+            node = searchPlaceToPut(toPut, node.getRightNode());
         }
         if (Utils.isEquals(node, toPut)) {
             return null;
@@ -554,14 +540,15 @@ class Tree {
     }
 
 
-    private void checkForRebalance() {
-        Node NodeForBalance = checkRight(nodeRoot);
-        if (NodeForBalance != null) {
-            rebalance(NodeForBalance);
+    private void checkToRebalance() {
+        Node toBalance = checkRight(nodeRoot);
+        if (toBalance != null) {
+            rebalance(toBalance);
+            rebalance(toBalance);
         }
-        NodeForBalance = checkLeft(nodeRoot);
-        if (NodeForBalance != null) {
-            rebalance(NodeForBalance);
+        toBalance = checkLeft(nodeRoot);
+        if (toBalance != null) {
+            rebalance(toBalance);
         }
     }
 }

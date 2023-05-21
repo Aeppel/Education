@@ -30,7 +30,7 @@ class Utils {
 
     //------------------Блок условий CheckLeft/Right---------------------------------
     public static boolean isLeftNodeBlackTooOrDifferentColor(Node node) {
-        return (node.leftNode != null) && (node.getColor() != node.getLeftNode().getColor()) || (node.getLeftNode() != null) && (node.getLeftNode().getColor() == Colors.BLACK);
+        return (node.getLeftNode() != null) && (node.getColor() != node.getLeftNode().getColor()) || (node.getLeftNode() != null) && (node.getLeftNode().getColor() == Colors.BLACK);
     }
 
     public static boolean isRightNodeBlackTooOrDifferentColor(Node node) {
@@ -39,6 +39,10 @@ class Utils {
 
     public static boolean isNoChildren(Node node) {
         return (isNull(node.getLeftNode()) && (isNull(node.getRightNode())));
+    }
+
+    public static boolean IsChildren(Node node) {
+        return isNotNull(node.getLeftNode()) && isNotNull(node.getRightNode());
     }
 
     public static boolean isNeighborSameColor(Node node, Node badNode) {
