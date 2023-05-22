@@ -81,6 +81,9 @@ class Utils {
         }
     }
 
+    public static boolean checkForRedNephewAndBlackLeftChild(Node node) {
+        return (Utils.isNotNull(node.getLeftNode()) && Utils.isBlack(node.getLeftNode()) && Utils.isNotNull(node.getRightNode()) && Utils.isBlack(node.getRightNode())) && Utils.isNotNull(node.getLeftGrandchildOfRightChild()) && Utils.isRed(node.getLeftGrandchildOfRightChild());
+    }
 }
 
 
