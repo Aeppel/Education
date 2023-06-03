@@ -45,6 +45,10 @@ class Utils {
         return isNotNull(node.getLeftNode()) && isNotNull(node.getRightNode());
     }
 
+    public static boolean hasChild(Node node) {
+        return node.getLeftNode() != null || node.getRightNode() != null;
+    }
+
     public static boolean isNeighborSameColor(Node node, Node badNode) {
         return (node.getRightNode() == null) && (badNode.getColor() != node.getLeftNode().getColor()) || (node.getLeftNode() == null) && (badNode.getColor() != node.getRightNode().getColor());
     }

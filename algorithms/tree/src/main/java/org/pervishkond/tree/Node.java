@@ -95,15 +95,18 @@ public class Node {
         this.color = color;
     }
 
-    protected void recoloring(Node nodeRoot) {
-        this.setColor(Colors.RED);
-        if (this.getLeftNode() != null) {
+    protected void recoloring() {
+        if (Utils.isNull(this.getParent())) {
+            this.setColor(Colors.BLACK);
+        } else {
+            this.setColor(Colors.RED);
+        }
+        if (Utils.isNotNull(this.getLeftNode())) {
             this.getLeftNode().setColor(Colors.BLACK);
         }
-        if (this.getRightNode() != null) {
+        if (Utils.isNotNull(this.getRightNode())) {
             this.getRightNode().setColor(Colors.BLACK);
         }
-        nodeRoot.setColor(Colors.BLACK);
     }
 
     protected void reverseRecoloring() {
@@ -116,7 +119,7 @@ public class Node {
         }
     }
 
-    protected void deleteRecoloring() {
+    protected void RecoloringAfterRemove() {
         parent = this.getParent();
         Node grandparent = parent.getParent();
         if (Utils.isNotNull(grandparent)) {
@@ -142,12 +145,151 @@ public class Node {
             this.getRightNode().setColor(Colors.BLACK);
             this.getLeftNode().setColor(Colors.BLACK);
         } else {
-            if (this.getLeftNode() != null) {
+            if (Utils.isNotNull(this.getLeftNode())) {
                 this.getLeftNode().setColor(Colors.RED);
             } else {
                 this.getRightNode().setColor(Colors.RED);
             }
         }
+    }
+
+    protected Node checkRight(Node node) {
+        Node toBalance = null;
+        if (Utils.isLeftNodeBlackTooOrDifferentColor(node)) {
+            toBalance = checkRight(node.getLeftNode());
+        }
+        if (Utils.isNull(toBalance)) {
+            toBalance = node;
+            if (Utils.isRightNodeBlackTooOrDifferentColor(node)) {
+                toBalance = checkRight(node.getRightNode());
+            }
+        }
+        if (Utils.isNull(toBalance) || Utils.isNoChildren(node) || Utils.isNeighborSameColor(node, toBalance)) {
+            return null;
+        }
+        return toBalance;
+    }
+
+    protected Node checkLeft(Node node) {
+        Node toBalance = null;
+        if (Utils.isRightNodeBlackTooOrDifferentColor(node)) {
+            toBalance = checkLeft(node.getRightNode());
+        }
+        if (Utils.isNull(toBalance)) {
+            toBalance = node;
+            if (Utils.isLeftNodeBlackTooOrDifferentColor(node)) {
+                toBalance = checkLeft(node.getLeftNode());
+            }
+        }
+        if (Utils.isNull(toBalance) || Utils.isNoChildren(node) || Utils.isNeighborSameColor(node, toBalance)) {
+            return null;
+        }
+        return toBalance;
+    }
+
+    protected Node rotateLeft(Node parent) {
+        Node nodePointer = this.getLeftNode();
+        if (Utils.isLeftNodeBlack(this)) {
+            this.setColor(Colors.BLACK);
+            parent.setColor(Colors.RED);
+            this.setLeftNode(parent);
+            parent.setRightNode(nodePointer);
+            if (Utils.isNull(parent.getParent())) {
+                parent.setParent(this);
+                return this;
+            } else {
+                Node grandparent = parent.getParent();
+                if (grandparent.getLeftNode() == parent) {
+                    grandparent.setLeftNode(this);
+                } else {
+                    grandparent.setRightNode(this);
+                }
+                this.setParent(grandparent);
+            }
+            this.getLeftNode().setParent(this);
+        } else if (Utils.isRightNodeBlack(this)) {
+            nodePointer = this.getRightGrandchildOfLeftChild();
+            this.setLeftGrandchildOfRightChild(this);
+            parent.setRightNode(this.getLeftNode());
+            this.setLeftNode(nodePointer);
+            this.getLeftNode().setParent(this);
+            this.setParent(nodePointer);
+        } else if (Utils.isNull(parent.getLeftNode()) || parent.getLeftNode().getNumber() == 0) {
+            if (Utils.isNull(parent.getParent())) { // в условии: если нет родителя выше то это рутнод. Заменяем руты на пэрэнт
+                parent.setRightNode(this.getLeftNode());
+                this.setLeftNode(parent);
+                this.getRightNode().setColor(Colors.BLACK);
+                this.setColor(Colors.BLACK);
+                this.getLeftNode().setParent(this);
+                return this;
+            } else {
+                Node grandParent = parent.getParent();
+                if (grandParent.getLeftNode() == parent) {
+                    nodePointer = parent.getLeftNode();
+                    grandParent.setLeftNode(this);
+                    grandParent.getLeftNode().setParent(grandParent);
+                } else {
+                    nodePointer = parent.getRightNode();
+                    grandParent.setRightNode(this);
+                    grandParent.getRightNode().setParent(grandParent);
+                }
+                this.setLeftGrandchildOfRightChild(nodePointer);
+                parent.recoloring();
+            }
+        }
+        return null;
+    }
+
+    protected Node rotateRight(Node parent) {
+        Node nodePointer = this.getRightNode();
+        if (Utils.isRightNodeBlack(this)) {
+            this.setColor(Colors.BLACK);
+            parent.setColor(Colors.RED);
+            this.setRightNode(parent);
+            parent.setLeftNode(nodePointer);
+            if (Utils.isNull(parent.getParent())) {
+                parent.setParent(this);
+                return this;
+            } else {
+                Node grandparent = parent.getParent();
+                if (grandparent.getLeftNode() == parent) {
+                    grandparent.setLeftNode(this);
+                } else {
+                    grandparent.setRightNode(this);
+                }
+                this.setParent(grandparent);
+            }
+            this.getRightNode().setParent(this);
+        } else if (Utils.isLeftNodeBlack(this)) {
+            nodePointer = this.getLeftGrandchildOfRightChild();
+            this.setRightGrandchildOfRightChild(this);
+            parent.setLeftNode(this.getRightNode());
+            this.setRightNode(nodePointer);
+            this.getRightNode().setParent(this);
+            this.setParent(nodePointer);
+        } else if (Utils.isNull(parent.getRightNode())) {
+            if (Utils.isNull(parent.getParent())) {
+                parent.setLeftNode(this.getRightNode());
+                this.setRightNode(parent);
+                this.getLeftNode().setColor(Colors.BLACK);
+                this.getRightNode().setParent(this);
+                return this;
+            } else {
+                Node grandParent = parent.getParent();
+                if (grandParent.getRightNode() == parent) {
+                    nodePointer = parent.getRightNode();
+                    grandParent.setRightNode(this);
+                    grandParent.getRightNode().setParent(grandParent);
+                } else {
+                    nodePointer = parent.getLeftNode();
+                    grandParent.setLeftNode(this);
+                    grandParent.getLeftNode().setParent(grandParent);
+                }
+                this.setRightGrandchildOfRightChild(nodePointer);
+                parent.recoloring();
+            }
+        }
+        return null;
     }
 }
 

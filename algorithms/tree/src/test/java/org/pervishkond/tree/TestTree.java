@@ -25,9 +25,9 @@ public class TestTree extends Tree {
         testTree.add(attempt5);
         testTree.add(attempt5);
         checkAddPart();
-        CheckRemovePart(attempt3);
-        CheckRemovePart(attempt3);
-        CheckRemovePart((int) (Math.random() * 10));
+        checkRemovePart(attempt3);
+        checkRemovePart(attempt3);
+        checkRemovePart((int) (Math.random() * 10));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class TestTree extends Tree {
     }
 
     @Test
-    public void CheckRemovePart(int number) {
+    public void checkRemovePart(int number) {
         testTree.remove(number);
         assertNodeRootAfterRemoving();
         assertLeftChildAfterRemoving();
