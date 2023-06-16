@@ -1,4 +1,4 @@
-package com.pervishkond.writersAndReaders;
+package com.pervishkond.writersandreaders;
 
 import java.util.ArrayList;
 

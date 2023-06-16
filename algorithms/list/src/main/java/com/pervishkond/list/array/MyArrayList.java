@@ -1,10 +1,8 @@
-package org.pervishkond.list.array;
+package com.pervishkond.list.array;
 
 public class MyArrayList {
     private int[] peopleAmount;
-    private int killed;
-    private int dead;
-    private int deadPeople;
+    private int deleted;
     private int[] newArray;
     private int length;
 
@@ -13,16 +11,14 @@ public class MyArrayList {
         peopleAmount = new int[length];
         for (int i = 1; i <= peopleAmount.length; i++) {
             peopleAmount[i - 1] = i;
-
         }
     }
 
-
     public void delete(int number) {
         peopleAmount[number - 1] = 0;
-        killed = number;
+        int killed = number;
         while (killed < peopleAmount.length) {
-            dead = peopleAmount[killed];
+            int dead = peopleAmount[killed];
             peopleAmount[killed] = peopleAmount[killed - 1];
             peopleAmount[killed - 1] = dead;
             killed++;
@@ -35,11 +31,10 @@ public class MyArrayList {
         newArray = new int[length];
         for (int j = 0; j < newArray.length; j++) {
             newArray[j] = peopleAmount[j];
-
         }
         peopleAmount = newArray.clone();
-        deadPeople++;
-        return deadPeople;
+        deleted++;
+        return deleted;
     }
 
     public void show() {
@@ -54,10 +49,9 @@ public class MyArrayList {
             newArray[j] = peopleAmount[j];
         }
         for (int i = peopleAmount.length; i < newArray.length; i++) {
-            newArray[i] = (i + 1) + deadPeople;
+            newArray[i] = (i + 1) + deleted;
         }
         peopleAmount = newArray.clone();
-
     }
 
     public int size() {

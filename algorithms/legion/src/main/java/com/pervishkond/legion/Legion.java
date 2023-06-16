@@ -1,7 +1,6 @@
 package com.pervishkond.legion;
-
-import org.pervishkond.list.array.MyArrayList;
-import org.pervishkond.list.linked.MyLinkedList;
+import com.pervishkond.list.array.MyArrayList;
+import com.pervishkond.list.linked.MyLinkedList;
 
 public class Legion {
     public static void main(String[] args) {

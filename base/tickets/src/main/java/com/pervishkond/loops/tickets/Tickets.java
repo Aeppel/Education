@@ -1,8 +1,5 @@
-package org.pervishkond.loops.tickets;
+package com.pervishkond.loops.tickets;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class Tickets {
 
     public Tickets() {
@@ -32,7 +29,7 @@ public class Tickets {
         return luckyTickets;
     }
 
-    private Boolean isLuckyTicket(int leftNumbers1, int leftNumbers2, int leftNumbers3, int rightNumbers1, int rightNumbers2, int rightNumbers3) {
+    Boolean isLuckyTicket(int leftNumbers1, int leftNumbers2, int leftNumbers3, int rightNumbers1, int rightNumbers2, int rightNumbers3) {
         return leftNumbers1 + leftNumbers2 + leftNumbers3 == rightNumbers1 + rightNumbers2 + rightNumbers3;
     }
 }
