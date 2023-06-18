@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(":base:tickets")
+}
+shadowJar {
+    manifest {
+        attributes(
+                'Main-Class': 'CalculateOfTickets')
+    }
+}

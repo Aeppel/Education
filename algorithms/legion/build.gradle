@@ -1,0 +1,9 @@
+dependencies {
+    implementation project(":algorithms:list")
+}
+shadowJar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.pervishkond.legion.Legion')
+    }
+}

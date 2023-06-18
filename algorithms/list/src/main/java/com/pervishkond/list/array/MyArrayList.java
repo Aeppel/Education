@@ -1,57 +1,57 @@
 package com.pervishkond.list.array;
 
 public class MyArrayList {
-    private int[] peopleAmount;
+    private int[] array;
     private int deleted;
     private int[] newArray;
     private int length;
 
     public MyArrayList(int length) {
         this.length = length;
-        peopleAmount = new int[length];
-        for (int i = 1; i <= peopleAmount.length; i++) {
-            peopleAmount[i - 1] = i;
+        array = new int[length];
+        for (int i = 1; i <= array.length; i++) {
+            array[i - 1] = i;
         }
     }
 
     public void delete(int number) {
-        peopleAmount[number - 1] = 0;
-        int killed = number;
-        while (killed < peopleAmount.length) {
-            int dead = peopleAmount[killed];
-            peopleAmount[killed] = peopleAmount[killed - 1];
-            peopleAmount[killed - 1] = dead;
-            killed++;
+        array[number - 1] = 0;
+        int remove = number;
+        while (remove < array.length) {
+            int dead = array[remove];
+            array[remove] = array[remove - 1];
+            array[remove - 1] = dead;
+            remove++;
         }
-        length = peopleAmount.length - 1;
+        length = array.length - 1;
         array(length);
     }
 
     private int array(int length) {
         newArray = new int[length];
         for (int j = 0; j < newArray.length; j++) {
-            newArray[j] = peopleAmount[j];
+            newArray[j] = array[j];
         }
-        peopleAmount = newArray.clone();
+        array = newArray.clone();
         deleted++;
         return deleted;
     }
 
     public void show() {
-        for (int j = 0; j < peopleAmount.length; j++) {
-            System.out.print(peopleAmount[j] + " ");
+        for (int j = 0; j < array.length; j++) {
+            System.out.print(array[j] + " ");
         }
     }
 
     public void add(int length) {
-        newArray = new int[peopleAmount.length + length];
-        for (int j = 0; j < peopleAmount.length; j++) {
-            newArray[j] = peopleAmount[j];
+        newArray = new int[array.length + length];
+        for (int j = 0; j < array.length; j++) {
+            newArray[j] = array[j];
         }
-        for (int i = peopleAmount.length; i < newArray.length; i++) {
+        for (int i = array.length; i < newArray.length; i++) {
             newArray[i] = (i + 1) + deleted;
         }
-        peopleAmount = newArray.clone();
+        array = newArray.clone();
     }
 
     public int size() {

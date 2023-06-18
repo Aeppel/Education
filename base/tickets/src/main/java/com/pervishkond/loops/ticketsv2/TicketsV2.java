@@ -40,7 +40,6 @@ public class TicketsV2 {
                 leftNumbers1++;
                 leftNumbers2 = 0;
             }
-
         }
         return luckyTickets;
     }
