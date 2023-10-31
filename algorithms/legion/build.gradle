@@ -1,9 +1,8 @@
-dependencies {
-    implementation project(":algorithms:list")
+plugins {
+    id 'java-library'
 }
-shadowJar {
-    manifest {
-        attributes(
-                'Main-Class': 'com.pervishkond.legion.Legion')
-    }
+
+dependencies {
+    implementation project(path: ':algorithms:list', configuration: 'shadow')
+    implementation 'org.testng:testng:7.4.0'
 }

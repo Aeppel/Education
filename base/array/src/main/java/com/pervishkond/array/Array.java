@@ -29,14 +29,11 @@ public class Array {
             if (length == 2) {
                 break;
             }
-
-
         }
         for (int x : soldiers) {
             if (x != 0) {
                 System.out.println(x);
             }
         }
-
     }
 }
