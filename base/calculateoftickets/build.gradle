@@ -1,0 +1,8 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    implementation project(path: ':base:tickets', configuration: 'shadow')
+    implementation 'org.testng:testng:7.4.0'
+}

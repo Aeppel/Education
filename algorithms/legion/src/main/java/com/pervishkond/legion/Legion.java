@@ -1,7 +1,7 @@
 package com.pervishkond.legion;
 
-import org.pervishkond.list.array.MyArrayList;
-import org.pervishkond.list.linked.MyLinkedList;
+import com.pervishkond.list.array.MyArrayList;
+import com.pervishkond.list.linked.MyLinkedList;
 
 public class Legion {
     public static void main(String[] args) {
@@ -16,14 +16,9 @@ public class Legion {
             myArrayList.delete(step);
             step += nextStep;
         }
-
         myArrayList.show();
-
         System.out.println("Time of completing code - ArrayList: " + (double) (System.currentTimeMillis() - m));
-
-
         System.out.println("");
-
         m = System.currentTimeMillis();
         MyLinkedList myLinkedList = new MyLinkedList(10);
         while (myLinkedList.size() > 3) {

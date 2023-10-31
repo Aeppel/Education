@@ -1,8 +1,10 @@
 .gradle
-!build
-!gradle/wrapper/gradle-wrapper.jar
+**/build/
+!src/**/build/
 
 ### IntelliJ IDEA ###
+.idea/gradle.xml
+.idea/workspace.xml
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml

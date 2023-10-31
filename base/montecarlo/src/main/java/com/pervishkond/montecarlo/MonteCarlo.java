@@ -1,4 +1,5 @@
 package com.pervishkond.montecarlo;
+
 public class MonteCarlo {
     public static void main(String[] args) {
         double circlePoints = 0;

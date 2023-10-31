@@ -19,7 +19,6 @@ public class Matrix {
             for (int j = 0; j < longestLengthY; j++) {
                 arrayA[s][j] += i;
                 i++;
-
             }
         }
     }
@@ -46,7 +45,6 @@ public class Matrix {
                 sum = 0;
             }
         }
-
     }
 
     private static void showResult(int[][] arrayC, int longestLengthY, int longestLengthX) {
@@ -56,10 +54,7 @@ public class Matrix {
             }
             System.out.println("");
         }
-
     }
-
-
 }
 
 

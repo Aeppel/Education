@@ -1,10 +1,6 @@
-package org.pervishkond.loops.tickets;
+package com.pervishkond.loops.tickets;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class Tickets {
-
     public Tickets() {
         System.out.println(calculate());
     }
@@ -12,7 +8,6 @@ public class Tickets {
     int luckyTickets = 0;
 
     private int calculate() {
-
         for (int rightNumbers1 = 0; rightNumbers1 <= 9; rightNumbers1++) {
             for (int rightNumbers2 = 0; rightNumbers2 <= 9; rightNumbers2++) {
                 for (int rightNumbers3 = 0; rightNumbers3 <= 9; rightNumbers3++) {
@@ -22,7 +17,6 @@ public class Tickets {
                                 if (isLuckyTicket(leftNumbers1, leftNumbers2, leftNumbers3, rightNumbers1, rightNumbers2, rightNumbers3)) {
                                     luckyTickets++;
                                 }
-
                             }
                         }
                     }
@@ -32,7 +26,7 @@ public class Tickets {
         return luckyTickets;
     }
 
-    private Boolean isLuckyTicket(int leftNumbers1, int leftNumbers2, int leftNumbers3, int rightNumbers1, int rightNumbers2, int rightNumbers3) {
+    boolean isLuckyTicket(int leftNumbers1, int leftNumbers2, int leftNumbers3, int rightNumbers1, int rightNumbers2, int rightNumbers3) {
         return leftNumbers1 + leftNumbers2 + leftNumbers3 == rightNumbers1 + rightNumbers2 + rightNumbers3;
     }
 }

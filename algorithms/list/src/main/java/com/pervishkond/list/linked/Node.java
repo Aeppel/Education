@@ -1,4 +1,4 @@
-package org.pervishkond.list.linked;
+package com.pervishkond.list.linked;
 
 public class Node {
     protected Node node;
